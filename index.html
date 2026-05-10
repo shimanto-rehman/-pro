@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="remittance-brand">
+        <img src="assets/images/remitance.png" alt="Remittance Management System">
+    </div>
+
+    <div class="auth-wrapper" id="authWrapper">
+        <input type="checkbox" class="auth-toggle" id="authToggle" aria-hidden="true">
+
+        <div class="auth-form-box access-form-box">
+            <form id="accessRequestForm">
+                <div class="login-logo">
+                    <img src="assets/images/logo.png" alt="RMS logo">
+                </div>
+                <h1>RMS Access Desk</h1>
+                <span>For MTB PLC employees and authorized remittance users</span>
+                <input type="text" placeholder="Employee ID / User ID" required>
+                <input type="text" placeholder="Branch or Division" required>
+                <input type="email" placeholder="Official Email Address" required>
+                <button type="submit">Send Request</button>
+                <div class="mobile-switch">
+                    <p>Already authorized?</p>
+                    <label class="switch-btn" for="authToggle">Sign In</label>
+                </div>
+            </form>
+        </div>
+
+        <div class="auth-form-box login-form-box">
+            <form id="loginForm">
+                <div class="login-logo">
+                    <img src="assets/images/logo.png" alt="RMS logo">
+                </div>
+                <h1>RMS Login</h1>
+                <span>Sign in with your RMS credentials</span>
+                <input type="text" id="username" placeholder="RMS Login Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <a href="#" id="forgotPassword">Forgot Password</a>
+                <button type="submit" class="sign-in-btn">Sign In</button>
+                <div class="mobile-switch">
+                    <p>Need RMS access or support?</p>
+                    <label class="switch-btn" for="authToggle">Contact Admin</label>
+                </div>
+            </form>
+        </div>
+
+        <div class="slide-panel-wrapper">
+            <div class="slide-panel">
+                <div class="panel-content panel-content-left">
+                    <h2>Welcome Back!</h2>
+                    <p>Access RMS with your credentials and continue managing your work.</p>
+                    <label class="transparent-btn" for="authToggle">Sign In</label>
+                </div>
+                <div class="panel-content panel-content-right">
+                    <h2>Need RMS Access?</h2>
+                    <p>Access is provisioned internally for Mutual Trust Bank PLC remittance operations.</p>
+                    <label class="transparent-btn" for="authToggle">Contact Admin</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright (c) 2026 CodeZenithAI All rights reserved. -->
+</body>
+
+</html>
