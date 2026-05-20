@@ -1,73 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Login</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div class="remittance-brand">
-        <img src="assets/images/remitance.png" alt="Remittance Management System">
-    </div>
-
-    <div class="auth-wrapper" id="authWrapper">
-        <input type="checkbox" class="auth-toggle" id="authToggle" aria-hidden="true">
-
-        <div class="auth-form-box access-form-box">
-            <form id="accessRequestForm">
-                <div class="login-logo">
-                    <img src="assets/images/logo.png" alt="RMS logo">
-                </div>
-                <h1>RMS Access Desk</h1>
-                <span>For MTB PLC employees and authorized remittance users</span>
-                <input type="text" placeholder="Employee ID / User ID" required>
-                <input type="text" placeholder="Branch or Division" required>
-                <input type="email" placeholder="Official Email Address" required>
-                <button type="submit">Send Request</button>
-                <div class="mobile-switch">
-                    <p>Already authorized?</p>
-                    <label class="switch-btn" for="authToggle">Sign In</label>
-                </div>
-            </form>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MTB eBank - Sidebar & Header</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+  </head>
+  <body class="dashboard-page">
+    <!-- Main Dashboard Layout -->
+    <div class="dashboard-wrapper">
+      <!-- Left Sidebar -->
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-logo">
+          <img src="assets/images/logo.png" alt="MTB Bank" class="sidebar-logo-img">
         </div>
+        <button
+          type="button"
+          class="sidebar-expand-toggle"
+          id="sidebarExpandToggle"
+          aria-expanded="false"
+          aria-controls="dashboardSidebarNav"
+          title="Expand sidebar"
+        >
+          <i class="bi bi-chevron-right toggle-icon-when-collapsed" aria-hidden="true"></i>
+          <i class="bi bi-chevron-left toggle-icon-when-expanded" aria-hidden="true"></i>
+          <span class="visually-hidden">Expand or collapse sidebar</span>
+        </button>
+        <nav class="sidebar-nav" id="dashboardSidebarNav">
+          <a href="index.html" class="nav-item active nav-has-children" data-subnav-id="nav-dashboard-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.33301 15L11.6663 15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1.95982 11.0125C1.66563 9.09817 1.51854 8.141 1.88046 7.29245C2.24238 6.4439 3.04535 5.86333 4.65127 4.70219L5.85115 3.83464C7.8489 2.39019 8.84778 1.66797 10.0003 1.66797C11.1529 1.66797 12.1517 2.39019 14.1495 3.83464L15.3494 4.70219C16.9553 5.86333 17.7583 6.4439 18.1202 7.29245C18.4821 8.141 18.335 9.09817 18.0408 11.0125L17.79 12.645C17.3729 15.3587 17.1644 16.7156 16.1912 17.5251C15.2179 18.3346 13.795 18.3346 10.9493 18.3346H9.05131C6.2056 18.3346 4.78275 18.3346 3.80949 17.5251C2.83623 16.7156 2.62772 15.3587 2.21068 12.645L1.95982 11.0125Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <span>Dashboard</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Dashboard sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-dashboard-sub">
+            <a href="#" class="subnav-item">Overview</a>
+            <a href="#" class="subnav-item">Analytics</a>
+            <a href="#" class="subnav-item">Statistics</a>
+          </div>
+          <a href="payment.html" class="nav-item nav-has-children" data-subnav-id="nav-payment-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.83366 5.55973C4.94539 5.55973 4.10006 5.4603 3.33366 5.2809C2.53368 5.09364 1.66699 5.66972 1.66699 6.50845V15.6826C1.66699 16.3562 1.66699 16.6931 1.82876 17.0404C1.92102 17.2385 2.13113 17.508 2.29948 17.6441C2.59465 17.8828 2.84099 17.9405 3.33366 18.0558C4.10006 18.2352 4.94539 18.3346 5.83366 18.3346C7.43122 18.3346 8.88988 18.013 10.0003 17.483C11.1108 16.9529 12.5694 16.6313 14.167 16.6313C15.0553 16.6313 15.9006 16.7307 16.667 16.9101C17.467 17.0974 18.3337 16.5213 18.3337 15.6826V6.50846C18.3337 5.83481 18.3337 5.49799 18.1719 5.15065C18.0796 4.95254 17.8695 4.68306 17.7012 4.54692C16.667 3.70023 15.0003 4.5365 15.0003 4.5365" stroke="#141414" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M12.0837 11.2513C12.0837 12.4019 11.1509 13.3346 10.0003 13.3346C8.84973 13.3346 7.91699 12.4019 7.91699 11.2513C7.91699 10.1007 8.84973 9.16797 10.0003 9.16797C11.1509 9.16797 12.0837 10.1007 12.0837 11.2513Z" stroke="#141414" stroke-width="1.5"/>
+              <path d="M4.58301 12.082L4.58301 12.0895" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15.417 10.4102L15.417 10.4176" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.91699 3.7513C8.3266 3.32989 9.4168 1.66797 10.0003 1.66797M12.0837 3.7513C11.6741 3.32989 10.5838 1.66797 10.0003 1.66797M10.0003 1.66797V6.66797" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Payment</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Payment sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-payment-sub">
+            <a href="create-payment.html" class="subnav-item">Create Payment File</a>
+            <a href="#" class="subnav-item">Utility Bills</a>
+            <a href="#" class="subnav-item">Standing Orders</a>
+          </div>
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-challan-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.52659 17.7911L6.09459 17.2159C5.71503 16.7106 4.90903 16.7513 4.5884 17.292C4.13843 18.0509 2.91699 17.7485 2.91699 16.8782V3.12442C2.91699 2.25414 4.13843 1.95172 4.5884 2.71059C4.90903 3.25133 5.71503 3.29203 6.09459 2.78667L6.52659 2.21149C7.07088 1.4868 8.20755 1.4868 8.75184 2.21149L8.81977 2.30193C9.39729 3.07087 10.6034 3.07087 11.1809 2.30193L11.2488 2.21149C11.7931 1.4868 12.9298 1.4868 13.4741 2.21149L13.9061 2.78667C14.2856 3.29203 15.0916 3.25133 15.4123 2.71059C15.8622 1.95172 17.0837 2.25414 17.0837 3.12442V16.8782C17.0837 17.7485 15.8622 18.0509 15.4123 17.292C15.0916 16.7513 14.2856 16.7106 13.9061 17.2159L13.4741 17.7911C12.9298 18.5158 11.7931 18.5158 11.2488 17.7911L11.1809 17.7007C10.6034 16.9317 9.39729 16.9317 8.81977 17.7007L8.75184 17.7911C8.20755 18.5158 7.07088 18.5158 6.52659 17.7911Z" stroke="#141414" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M12.5 7.5L7.5 12.5" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.5 12.5H12.4925M7.50747 7.5H7.5" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Challan</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Challan sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-challan-sub">
+            <a href="#" class="subnav-item">Create Challan</a>
+            <a href="#" class="subnav-item">View Challans</a>
+            <a href="#" class="subnav-item">History</a>
+          </div>
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-cheque-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_6137_87403)">
+              <path d="M5.83366 9.16797H5.00033C2.24255 9.16797 1.66699 9.74352 1.66699 12.5013V15.0013C1.66699 17.7591 2.24255 18.3346 5.00033 18.3346H15.0003C17.7581 18.3346 18.3337 17.7591 18.3337 15.0013V12.5013C18.3337 10.6587 18.0767 9.79032 17.0837 9.41686" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 15L15 15" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.3699 2.61206C14.7425 2.20779 14.9287 2.00565 15.1267 1.88775C15.6044 1.60325 16.1925 1.59441 16.6782 1.86441C16.8795 1.97631 17.0715 2.17276 17.4555 2.56565C17.8396 2.95853 18.0316 3.15498 18.141 3.36088C18.4049 3.85769 18.3963 4.4594 18.1182 4.94806C18.0029 5.15058 17.8053 5.34116 17.4102 5.72233L12.7083 10.2575C11.4626 11.4591 10.6911 11.7082 8.9657 11.663C8.65246 11.6548 8.49584 11.6507 8.4048 11.5473C8.31376 11.4438 8.32619 11.284 8.35105 10.9645C8.46565 9.49141 8.72519 8.73661 9.72772 7.64886L14.3699 2.61206Z" stroke="#141414" stroke-width="1.5" stroke-linejoin="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_6137_87403">
+              <rect width="20" height="20" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+            <span>Cheque & Payorder</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Cheque & Payorder sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-cheque-sub">
+            <a href="#" class="subnav-item">Issue Cheque</a>
+            <a href="#" class="subnav-item">Payorder Request</a>
+            <a href="#" class="subnav-item">Status Check</a>
+          </div>
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-collection-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.0003 4.53657C15.0003 4.53657 16.667 3.70031 17.7012 4.547C17.8695 4.68314 18.0796 4.95262 18.1719 5.15072C18.3337 5.49806 18.3337 5.83489 18.3337 6.50853V15.6827C18.3337 16.5214 17.467 17.0975 16.667 16.9102C15.9006 16.7308 15.0553 16.6314 14.167 16.6314C12.5694 16.6314 11.1108 16.953 10.0003 17.483C8.88988 18.0131 7.43122 18.3347 5.83366 18.3347C4.94539 18.3347 4.10006 18.2353 3.33366 18.0559C2.84099 17.9406 2.59465 17.8829 2.29948 17.6442C2.13113 17.5081 1.92102 17.2386 1.82876 17.0405C1.66699 16.6931 1.66699 16.3563 1.66699 15.6827V6.50853C1.66699 5.66979 2.53368 5.09372 3.33366 5.28097C3.97927 5.4321 4.68088 5.52648 5.41699 5.55247" stroke="#141414" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M12.0837 11.2513C12.0837 12.4019 11.1509 13.3346 10.0003 13.3346C8.84973 13.3346 7.91699 12.4019 7.91699 11.2513C7.91699 10.1007 8.84973 9.16797 10.0003 9.16797C11.1509 9.16797 12.0837 10.1007 12.0837 11.2513Z" stroke="#141414" stroke-width="1.5"/>
+              <path d="M4.58301 12.082L4.58301 12.0895" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15.417 10.4102L15.417 10.4176" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.91699 4.58464C8.3266 5.00605 9.4168 6.66797 10.0003 6.66797M12.0837 4.58464C11.6741 5.00605 10.5838 6.66797 10.0003 6.66797M10.0003 6.66797V1.66797" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> 
+            <span>Collection</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Collection sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-collection-sub">
+            <a href="#" class="subnav-item">Invoices</a>
+            <a href="#" class="subnav-item">Refunds</a>
+          </div>
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-beneficiary-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.5137 16.668H15.9222C16.8804 16.668 17.6426 16.2314 18.3269 15.6209C20.0654 14.0701 15.9788 12.5013 14.5837 12.5013M12.917 4.22528C13.1062 4.18774 13.3027 4.16797 13.5043 4.16797C15.0209 4.16797 16.2503 5.28726 16.2503 6.66797C16.2503 8.04868 15.0209 9.16797 13.5043 9.16797C13.3027 9.16797 13.1062 9.14819 12.917 9.11066" stroke="#141414" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M3.73443 13.4273C2.75195 13.9538 0.175948 15.0289 1.7449 16.3742C2.51133 17.0313 3.36492 17.5013 4.4381 17.5013H10.5619C11.6351 17.5013 12.4887 17.0313 13.2551 16.3742C14.8241 15.0289 12.2481 13.9538 11.2656 13.4273C8.96167 12.1926 6.03832 12.1926 3.73443 13.4273Z" stroke="#141414" stroke-width="1.5"/>
+              <path d="M10.8333 6.2513C10.8333 8.09225 9.34095 9.58464 7.5 9.58464C5.65905 9.58464 4.16667 8.09225 4.16667 6.2513C4.16667 4.41035 5.65905 2.91797 7.5 2.91797C9.34095 2.91797 10.8333 4.41035 10.8333 6.2513Z" stroke="#141414" stroke-width="1.5"/>
+            </svg>
+            <span>Beneficiary</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Beneficiary sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-beneficiary-sub">
+            <a href="#" class="subnav-item">Add Beneficiary</a>
+            <a href="#" class="subnav-item">Manage List</a>
+            <a href="#" class="subnav-item">Import/Export</a>
+          </div>
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-reports-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.1663 1.66797V3.33464M9.99967 1.66797V3.33464M5.83301 1.66797V3.33464" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.91699 13.3333L2.91699 7.5C2.91699 5.14298 2.91699 3.96447 3.64923 3.23223C4.38146 2.5 5.55997 2.5 7.91699 2.5L12.0837 2.5C14.4407 2.5 15.6192 2.5 16.3514 3.23223C17.0837 3.96447 17.0837 5.14298 17.0837 7.5V10C17.0837 13.9284 17.0837 15.8926 15.8633 17.1129C14.6429 18.3333 12.6787 18.3333 8.75033 18.3333H7.91699C5.55997 18.3333 4.38146 18.3333 3.64923 17.6011C2.91699 16.8689 2.91699 15.6904 2.91699 13.3333Z" stroke="#141414" stroke-width="1.5"/>
+              <path d="M6.66699 12.4987H10.0003M6.66699 8.33203L13.3337 8.33203" stroke="#141414" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M17.083 12.082C17.083 13.2326 16.1503 14.1654 14.9997 14.1654C14.5836 14.1654 14.093 14.0925 13.6884 14.2009C13.3289 14.2972 13.0482 14.578 12.9518 14.9374C12.8434 15.342 12.9163 15.8326 12.9163 16.2487C12.9163 17.3993 11.9836 18.332 10.833 18.332" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+            <span>Reports</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Reports sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-reports-sub">
+            <a href="#" class="subnav-item">Transaction Reports</a>
+            <a href="#" class="subnav-item">Account Summary</a>
+            <a href="#" class="subnav-item">Export Data</a>
+            <a href="#" class="subnav-item">Custom Reports</a>
+          </div>
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-config-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.7642 5.94986L17.3529 5.23603C17.0418 4.69617 16.8863 4.42624 16.6217 4.3186C16.357 4.21096 16.0577 4.2959 15.4591 4.46577L14.4422 4.75218C14.0601 4.84031 13.6591 4.79032 13.3101 4.61103L13.0294 4.44905C12.7302 4.25739 12.5 3.97481 12.3726 3.64265L12.0943 2.8115C11.9113 2.26148 11.8198 1.98647 11.602 1.82917C11.3842 1.67188 11.0949 1.67188 10.5163 1.67188L9.58729 1.67188C9.00866 1.67188 8.71934 1.67188 8.50153 1.82917C8.28372 1.98647 8.19223 2.26148 8.00925 2.8115L7.73095 3.64265C7.60355 3.97481 7.37339 4.25739 7.07415 4.44905L6.79341 4.61103C6.44446 4.79032 6.0435 4.84031 5.66133 4.75218L4.64446 4.46577C4.04585 4.2959 3.74655 4.21096 3.4819 4.3186C3.21725 4.42624 3.06171 4.69617 2.75064 5.23603L2.33931 5.94986C2.04772 6.4559 1.90193 6.70892 1.93022 6.97827C1.95852 7.24762 2.1537 7.46468 2.54406 7.8988L3.40326 8.85938C3.61326 9.12524 3.76235 9.58854 3.76235 10.0051C3.76235 10.4219 3.61331 10.8851 3.40328 11.1509L2.54406 12.1115C2.1537 12.5457 1.95852 12.7627 1.93022 13.0321C1.90193 13.3014 2.04773 13.5545 2.33931 14.0605L2.75062 14.7743C3.0617 15.3141 3.21725 15.5841 3.4819 15.6917C3.74655 15.7994 4.04586 15.7144 4.64448 15.5445L5.66129 15.2581C6.04353 15.17 6.44456 15.22 6.79356 15.3994L7.07426 15.5614C7.37343 15.753 7.60354 16.0356 7.73092 16.3677L8.00925 17.1989C8.19223 17.7489 8.28372 18.0239 8.50153 18.1812C8.71934 18.3385 9.00866 18.3385 9.58729 18.3385H10.5163C11.0949 18.3385 11.3842 18.3385 11.602 18.1812C11.8198 18.0239 11.9113 17.7489 12.0943 17.1989L12.3726 16.3677C12.5 16.0356 12.7301 15.753 13.0293 15.5614L13.31 15.3994C13.659 15.22 14.06 15.17 14.4423 15.2581L15.4591 15.5445C16.0577 15.7144 16.357 15.7994 16.6217 15.6917C16.8863 15.5841 17.0419 15.3141 17.3529 14.7743L17.7642 14.0605C18.0558 13.5545 18.2016 13.3014 18.1733 13.0321C18.145 12.7627 17.9499 12.5457 17.5595 12.1115L16.7003 11.1509C16.4903 10.8851 16.3412 10.4219 16.3412 10.0051C16.3412 9.58854 16.4903 9.12524 16.7003 8.85938L17.5595 7.8988C17.9499 7.46468 18.145 7.24762 18.1733 6.97827C18.2016 6.70892 18.0558 6.4559 17.7642 5.94986Z" stroke="#141414" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M12.9329 9.9987C12.9329 11.6095 11.6271 12.9154 10.0163 12.9154C8.40545 12.9154 7.09961 11.6095 7.09961 9.9987C7.09961 8.38787 8.40545 7.08203 10.0163 7.08203C11.6271 7.08203 12.9329 8.38787 12.9329 9.9987Z" stroke="#141414" stroke-width="1.5"/>
+            </svg>              
+            <span>Configuration</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Configuration sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-config-sub">
+            <a href="#" class="subnav-item">General Settings</a>
+            <a href="#" class="subnav-item">Security Options</a>
+            <a href="#" class="subnav-item">Preferences</a>
+          </div>
+          <!-- Mobile header user in right sidebar (icon + name only) -->
+          <div class="sidebar-mobile-user d-flex d-md-none dropdown">
+            <button class="sidebar-mobile-user-btn" id="sidebarUserDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="user-avatar-header">
+                <i class="bi bi-person-circle"></i>
+              </div>
+              <div class="sidebar-mobile-user-name">Mr. Hasan</div>
+            </button>
+            <ul class="dropdown-menu sidebar-mobile-user-menu" aria-labelledby="sidebarUserDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Change Password</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="login.html">Logout</a></li>
+            </ul>
+          </div>
+          <a href="#" class="nav-item support-item nav-has-children" data-subnav-id="nav-support-sub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_6137_87444)">
+              <path d="M6.25 10H11.25M6.25 6.66667H8.75" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.08301 16.668C7.95833 17.3927 9.01176 17.8545 10.2193 17.9337C11.1707 17.9961 12.164 17.996 13.1134 17.9337C13.4404 17.9122 13.7967 17.8352 14.1037 17.7105C14.4451 17.5717 14.6159 17.5023 14.7027 17.5128C14.7895 17.5233 14.9154 17.615 15.1672 17.7982C15.6112 18.1213 16.1706 18.3534 17.0001 18.3334C17.4195 18.3234 17.6292 18.3183 17.7231 18.1604C17.817 18.0024 17.7001 17.7837 17.4662 17.3464C17.1418 16.7398 16.9363 16.0454 17.2477 15.489C17.7841 14.6942 18.2396 13.753 18.3062 12.7365C18.3419 12.1903 18.3419 11.6247 18.3062 11.0785C18.2618 10.4012 18.0974 9.75735 17.834 9.16797" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.2878 14.5736C13.2508 14.3785 15.611 12.0071 15.8052 9.02999C15.8432 8.44739 15.8432 7.84406 15.8052 7.26146C15.611 4.28437 13.2508 1.91297 10.2878 1.71785C9.27699 1.65128 8.2216 1.65141 7.21281 1.71785C4.24985 1.91297 1.8897 4.28437 1.6955 7.26146C1.65749 7.84406 1.65749 8.44739 1.6955 9.02999C1.76623 10.1143 2.25026 11.1182 2.82009 11.9659C3.15096 12.5594 2.9326 13.3001 2.58798 13.9471C2.33949 14.4136 2.21525 14.6469 2.31501 14.8154C2.41476 14.9839 2.63759 14.9893 3.08325 15C3.96459 15.0213 4.55889 14.7738 5.03064 14.4291C5.2982 14.2336 5.43197 14.1359 5.52418 14.1247C5.61638 14.1134 5.79783 14.1875 6.16066 14.3355C6.48678 14.4686 6.86543 14.5507 7.21281 14.5736C8.2216 14.64 9.27699 14.6402 10.2878 14.5736Z" stroke="#141414" stroke-width="1.5" stroke-linejoin="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_6137_87444">
+              <rect width="20" height="20" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+            <span>Support</span>
+            <button class="nav-expand-btn" type="button" aria-label="Toggle Support sub menu">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </a>
+          <div class="sidebar-subnav" id="nav-support-sub">
+            <a href="#" class="subnav-item">Help Center</a>
+            <a href="#" class="subnav-item">Contact Us</a>
+            <a href="#" class="subnav-item">FAQs</a>
+          </div>
+        </nav>
+      </aside>
 
-        <div class="auth-form-box login-form-box">
-            <form id="loginForm">
-                <div class="login-logo">
-                    <img src="assets/images/logo.png" alt="RMS logo">
-                </div>
-                <h1>RMS Login</h1>
-                <span>Sign in with your RMS credentials</span>
-                <input type="text" id="username" placeholder="RMS Login Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <a href="#" id="forgotPassword">Forgot Password</a>
-                <button type="submit" class="sign-in-btn">Sign In</button>
-                <div class="mobile-switch">
-                    <p>Need RMS access or support?</p>
-                    <label class="switch-btn" for="authToggle">Contact Admin</label>
-                </div>
-            </form>
-        </div>
+      <!-- Sidebar Overlay for Mobile -->
+      <div class="sidebar-overlay"></div>
 
-        <div class="slide-panel-wrapper">
-            <div class="slide-panel">
-                <div class="panel-content panel-content-left">
-                    <h2>Welcome Back!</h2>
-                    <p>Access RMS with your credentials and continue managing your work.</p>
-                    <label class="transparent-btn" for="authToggle">Sign In</label>
+      <!-- Main Content Area -->
+      <main class="dashboard-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+          <div class="header-top">
+            <div class="header-right">
+              <div class="sidebar-logo-mobile d-md-none">
+                <img src="assets/images/e-bank.png" alt="MTB Bank" class="sidebar-logo-img-mobile">
+              </div>
+              <div class="header-actions">
+                <div class="dropdown quick-menus-dropdown">
+                  <button
+                    class="btn-quick-menu dropdown-toggle-no-caret"
+                    type="button"
+                    id="quickMenusDropdown"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                  >
+                    <i class="bi bi-grid" aria-hidden="true"></i>
+                    <span class="btn-quick-menu-label">Quick menus</span>
+                    <i class="bi bi-chevron-down quick-menu-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div
+                    class="dropdown-menu dropdown-menu-end header-dropdown-panel quick-menus-panel shadow-sm"
+                    aria-labelledby="quickMenusDropdown"
+                  >
+                    <div class="dropdown-panel-header">Shortcuts</div>
+                    <div class="quick-menus-grid">
+                      <a href="index.html" class="quick-menu-item">
+                        <span class="quick-menu-item-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                        <span class="quick-menu-item-text">Dashboard</span>
+                      </a>
+                      <a href="#" class="quick-menu-item">
+                        <span class="quick-menu-item-icon"><i class="bi bi-wallet2" aria-hidden="true"></i></span>
+                        <span class="quick-menu-item-text">Payments</span>
+                      </a>
+                      <a href="#" class="quick-menu-item">
+                        <span class="quick-menu-item-icon"><i class="bi bi-receipt" aria-hidden="true"></i></span>
+                        <span class="quick-menu-item-text">Challan</span>
+                      </a>
+                      <a href="#" class="quick-menu-item">
+                        <span class="quick-menu-item-icon"><i class="bi bi-bank" aria-hidden="true"></i></span>
+                        <span class="quick-menu-item-text">Cheque</span>
+                      </a>
+                      <a href="#" class="quick-menu-item">
+                        <span class="quick-menu-item-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                        <span class="quick-menu-item-text">Beneficiary</span>
+                      </a>
+                      <a href="#" class="quick-menu-item">
+                        <span class="quick-menu-item-icon"><i class="bi bi-graph-up" aria-hidden="true"></i></span>
+                        <span class="quick-menu-item-text">Reports</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div class="panel-content panel-content-right">
-                    <h2>Need RMS Access?</h2>
-                    <p>Access is provisioned internally for Mutual Trust Bank PLC remittance operations.</p>
-                    <label class="transparent-btn" for="authToggle">Contact Admin</label>
+                <div class="dropdown notification-dropdown">
+                  <button
+                    class="btn-notification dropdown-toggle-no-caret"
+                    type="button"
+                    id="notificationDropdown"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    aria-expanded="false"
+                    aria-label="Notifications"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M2.10794 11.9963C1.93073 13.1239 2.72301 13.9065 3.69305 14.2965C7.41201 15.7918 12.5873 15.7918 16.3063 14.2965C17.2763 13.9065 18.0686 13.1239 17.8914 11.9963C17.7825 11.3034 17.244 10.7264 16.845 10.163C16.3224 9.4159 16.2705 8.60106 16.2704 7.73415C16.2704 4.38389 13.4629 1.66797 9.99968 1.66797C6.53645 1.66797 3.72895 4.38389 3.72895 7.73415C3.72887 8.60106 3.67694 9.4159 3.15435 10.163C2.75537 10.7264 2.21685 11.3034 2.10794 11.9963Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M7.5 17.5C8.16345 18.0182 9.03956 18.3333 10 18.3333C10.9604 18.3333 11.8366 18.0182 12.5 17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="notification-badge">2</span>
+                  </button>
+                  <div
+                    class="dropdown-menu dropdown-menu-end header-dropdown-panel notification-panel shadow-sm"
+                    aria-labelledby="notificationDropdown"
+                  >
+                    <div class="dropdown-panel-header notification-panel-header">
+                      <span>Notifications</span>
+                      <button type="button" class="btn-notification-mark-read">Mark all read</button>
+                    </div>
+                    <div class="notification-list">
+                      <a href="#" class="notification-item unread">
+                        <span class="notification-dot" aria-hidden="true"></span>
+                        <div class="notification-body">
+                          <div class="notification-title">Payment batch approved</div>
+                          <div class="notification-meta">Batch #54329 · 2 min ago</div>
+                        </div>
+                      </a>
+                      <a href="#" class="notification-item unread">
+                        <span class="notification-dot" aria-hidden="true"></span>
+                        <div class="notification-body">
+                          <div class="notification-title">New challan pending review</div>
+                          <div class="notification-meta">Ref CH-2026-014 · 1 hr ago</div>
+                        </div>
+                      </a>
+                      <a href="#" class="notification-item">
+                        <span class="notification-dot" aria-hidden="true"></span>
+                        <div class="notification-body">
+                          <div class="notification-title">Scheduled maintenance</div>
+                          <div class="notification-meta">Sunday 02:00–04:00</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="dropdown-panel-footer">
+                      <a href="#" class="notification-view-all">View all activity</a>
+                    </div>
+                  </div>
                 </div>
+                <button class="btn-hamburger d-md-none" type="button" aria-label="Open menu">
+                  <i class="bi bi-list"></i>
+                </button>
+              </div>
+              <div class="dropdown header-user-dropdown d-none d-md-block">
+                <button
+                  class="header-user header-user-trigger dropdown-toggle-no-caret"
+                  type="button"
+                  id="headerUserDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <div class="user-avatar-header">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                  </div>
+                  <div class="user-info">
+                    <div class="user-name-header">Mr. Hasan</div>
+                    <div class="user-company">Selise Digital Platform</div>
+                    <i class="bi bi-chevron-down user-dropdown-chevron" aria-hidden="true"></i>
+                  </div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end header-user-menu header-dropdown-panel shadow-sm" aria-labelledby="headerUserDropdown">
+                  <li>
+                    <a class="dropdown-item header-user-menu-item" href="#"><i class="bi bi-person me-2" aria-hidden="true"></i>Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item header-user-menu-item" href="#"><i class="bi bi-key me-2" aria-hidden="true"></i>Change password</a>
+                  </li>
+                  <li><hr class="dropdown-divider my-1" /></li>
+                  <li>
+                    <a class="dropdown-item header-user-menu-item text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Logout</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </div>
+          </div>
+        </header>
+      </main>
     </div>
-    <!-- Copyright (c) 2026 CodeZenithAI All rights reserved. -->
-</body>
 
+    <!-- Bootstrap JS -->
+    <script src="assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>

@@ -1,0 +1,433 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --rms-gradient: linear-gradient(to right, #C91747, #881254, #3D1A64, #245471, #147B7A);
+    --rms-red: #C91747;
+    --rms-purple: #3D1A64;
+    --rms-teal: #147B7A;
+    --text-strong: #231827;
+    --text-muted: #6f6575;
+}
+
+body {
+    align-items: center;
+    background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 24px;
+    position: relative;
+}
+
+body::before {
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: url("../images/login-right-1.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+    inset: -600px 0 0;
+    position: absolute;
+    z-index: 0;
+}
+
+h1 {
+    background: var(--rms-gradient);
+    background-clip: text;
+    color: transparent;
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 16px 0 12px;
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+}
+
+p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 20px 0 30px;
+}
+
+span {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+}
+
+a {
+    color: var(--rms-purple);
+    font-size: 0.88rem;
+    margin: 14px 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #245471;
+    text-decoration: underline;
+}
+
+button,
+.transparent-btn,
+.switch-btn {
+    background: var(--rms-gradient);
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 5px 20px rgba(136, 18, 84, 0.24);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    min-width: 168px;
+    padding: 13px 34px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+button:hover,
+.transparent-btn:hover,
+.switch-btn:hover {
+    box-shadow: 0 7px 24px rgba(136, 18, 84, 0.32);
+    transform: translateY(-2px);
+}
+
+button:active,
+.transparent-btn:active,
+.switch-btn:active {
+    transform: translateY(0);
+}
+
+button:focus {
+    outline: none;
+}
+
+.transparent-btn {
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+
+.transparent-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+form {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: 0 50px;
+    text-align: center;
+}
+
+input {
+    background: #fff;
+    border: 2px solid rgba(61, 26, 100, 0.4);
+    border-radius: 25px;
+    font-size: 0.88rem;
+    margin: 8px 0;
+    outline: none;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+input:focus {
+    border-color: rgba(61, 26, 100, 0.72);
+    box-shadow: 0 0 0 3px rgba(136, 18, 84, 0.1);
+}
+
+.auth-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.remittance-brand {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-width: min(520px, 86vw);
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.remittance-brand img {
+    display: block;
+    max-height: 92px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.auth-wrapper {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(61, 26, 100, 0.24);
+    max-width: 100%;
+    min-height: 550px;
+    overflow: hidden;
+    position: relative;
+    width: 850px;
+    z-index: 1;
+}
+
+.auth-form-box {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.6s ease-in-out;
+}
+
+.login-form-box {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.auth-toggle:checked~.login-form-box {
+    transform: translateX(100%);
+}
+
+.access-form-box {
+    left: 0;
+    opacity: 0;
+    width: 50%;
+    z-index: 1;
+}
+
+.auth-toggle:checked~.access-form-box {
+    animation: show 0.6s;
+    opacity: 1;
+    transform: translateX(100%);
+    z-index: 5;
+}
+
+@keyframes show {
+
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.slide-panel-wrapper {
+    height: 100%;
+    left: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: transform 0.6s ease-in-out;
+    width: 50%;
+    z-index: 100;
+}
+
+.auth-toggle:checked~.slide-panel-wrapper {
+    transform: translateX(-100%);
+}
+
+.slide-panel {
+    background: var(--rms-gradient);
+    color: #fff;
+    height: 100%;
+    left: -100%;
+    position: relative;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    width: 200%;
+}
+
+.slide-panel::after {
+    background-image: url("../images/login-right-1.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+    inset: 0;
+    opacity: 0.12;
+    position: absolute;
+}
+
+.auth-toggle:checked~.slide-panel-wrapper .slide-panel {
+    transform: translateX(50%);
+}
+
+.panel-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: 0 50px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    width: 50%;
+    z-index: 1;
+}
+
+.panel-content-left {
+    transform: translateX(-20%);
+}
+
+.auth-toggle:checked~.slide-panel-wrapper .panel-content-left {
+    transform: translateX(0);
+}
+
+.panel-content-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.auth-toggle:checked~.slide-panel-wrapper .panel-content-right {
+    transform: translateX(20%);
+}
+
+.login-logo img {
+    display: block;
+    height: 54px;
+    margin: 0 auto;
+    object-fit: contain;
+    width: auto;
+}
+
+.mobile-switch {
+    color: var(--rms-purple);
+    display: none;
+    margin-top: 20px;
+}
+
+.mobile-switch p {
+    font-size: 0.88rem;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+        padding: 14px;
+        gap: 14px;
+    }
+
+    body::before {
+        inset: -360px 0 0;
+    }
+
+    .auth-wrapper {
+        border-radius: 16px;
+        min-height: auto;
+        width: 100%;
+    }
+
+    .remittance-brand img {
+        max-height: 70px;
+    }
+
+    .auth-form-box,
+    .login-form-box,
+    .access-form-box {
+        height: auto;
+        left: 0;
+        opacity: 1;
+        position: static;
+        transform: none;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .access-form-box {
+        display: none;
+    }
+
+    .auth-toggle:checked~.login-form-box {
+        display: none;
+        transform: none;
+    }
+
+    .auth-toggle:checked~.access-form-box {
+        display: block;
+        transform: none;
+    }
+
+    .slide-panel-wrapper {
+        display: none;
+    }
+
+    form {
+        height: auto;
+        padding: 34px 24px;
+    }
+
+    h1 {
+        font-size: 1.32rem;
+    }
+
+    input {
+        padding: 12px 16px;
+    }
+
+    button,
+    .transparent-btn,
+    .switch-btn {
+        font-size: 0.76rem;
+        padding: 12px 30px;
+    }
+
+    .login-logo img {
+        height: 46px;
+    }
+
+    .mobile-switch {
+        display: block;
+    }
+
+    .mobile-switch .switch-btn {
+        background: transparent;
+        border: 2px solid var(--rms-purple);
+        box-shadow: none;
+        color: var(--rms-purple);
+        display: inline-block;
+        margin-top: 6px;
+    }
+
+    .mobile-switch .switch-btn:hover {
+        background: var(--rms-purple);
+        color: #fff;
+    }
+}
