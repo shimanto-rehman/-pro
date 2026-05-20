@@ -8,7 +8,10 @@
     --rms-gradient: linear-gradient(to right, #C91747, #881254, #3D1A64, #245471, #147B7A);
     --rms-red: #C91747;
     --rms-purple: #3D1A64;
+    --rms-slate: #245471;
     --rms-teal: #147B7A;
+    --brand-title: #003e6d;
+    --brand-tagline: #0078a4;
     --text-strong: #231827;
     --text-muted: #6f6575;
 }
@@ -173,8 +176,9 @@ input:focus {
 .remittance-brand {
     align-items: center;
     display: flex;
+    gap: 1.25rem;
     justify-content: center;
-    max-width: min(520px, 86vw);
+    max-width: min(960px, 96vw);
     position: relative;
     width: 100%;
     z-index: 1;
@@ -182,9 +186,40 @@ input:focus {
 
 .remittance-brand img {
     display: block;
+    flex-shrink: 0;
     max-height: 92px;
-    max-width: 100%;
+    max-width: min(220px, 38vw);
     object-fit: contain;
+}
+
+.remittance-brand-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-width: 0;
+    text-align: left;
+}
+
+.remittance-brand-title {
+    color: var(--brand-title);
+    font-size: clamp(1.25rem, 2.6vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin: 0;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.remittance-brand-tagline {
+    color: var(--brand-tagline);
+    font-family: inherit;
+    font-size: clamp(0.78rem, 1.35vw, 0.95rem);
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    line-height: 1.2;
+    margin: 0;
+    white-space: nowrap;
 }
 
 .auth-wrapper {
@@ -355,8 +390,32 @@ input:focus {
         width: 100%;
     }
 
+    .remittance-brand {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
     .remittance-brand img {
         max-height: 70px;
+        max-width: min(180px, 62vw);
+    }
+
+    .remittance-brand-copy {
+        text-align: center;
+    }
+
+    .remittance-brand-title,
+    .remittance-brand-tagline {
+        white-space: nowrap;
+    }
+
+    .remittance-brand-title {
+        font-size: clamp(1rem, 4.5vw, 1.35rem);
+    }
+
+    .remittance-brand-tagline {
+        font-size: clamp(0.68rem, 2.6vw, 0.82rem);
     }
 
     .auth-form-box,
