@@ -279,6 +279,19 @@
     height: 6px;
   }
 
+  .sidebar-subnav .subnav-item.active {
+    background: var(--rms-hover-tint);
+    color: var(--rms-purple);
+    font-weight: 600;
+    padding-left: 1.75rem;
+  }
+
+  .sidebar-subnav .subnav-item.active::before {
+    background: var(--rms-teal);
+    width: 6px;
+    height: 6px;
+  }
+
   
   .nav-item svg,
   .nav-item .nav-item-icon {
@@ -2197,6 +2210,11 @@
       width: 100%;
     }
 
+    .dashboard-sidebar.sidebar-expanded ~ .dashboard-content .dashboard-header {
+      left: 0;
+      width: 100%;
+    }
+
     .dashboard-sidebar {
       display: block;
       position: fixed;
@@ -2215,7 +2233,11 @@
     .dashboard-sidebar.show {
       transform: translateX(0);
     }
-    
+
+    .dashboard-sidebar.sidebar-expanded {
+      width: min(280px, 88vw);
+    }
+
     .dashboard-sidebar .sidebar-logo {
       display: none;
     }
@@ -2539,7 +2561,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem 1.5rem;
-  margin: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 .rms-dash-eyebrow {
@@ -3132,5 +3154,288 @@
   .rms-bar-fill,
   .rms-hbar-fill {
     animation: none;
+  }
+}
+
+/* ============================================
+   TRANSACTION SEARCH STATUS PAGES
+   ============================================ */
+
+.rms-page-view[hidden] {
+  display: none !important;
+}
+
+.rms-txn-page {
+  padding: 1.25rem 1.5rem 2.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.rms-txn-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.rms-txn-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--rms-teal);
+  margin: 0 0 0.4rem;
+}
+
+.rms-txn-breadcrumb i {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.rms-txn-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 0.35rem;
+}
+
+.rms-txn-desc {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+.rms-txn-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 18px rgba(61, 26, 100, 0.07);
+  padding: 1.15rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.rms-txn-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.rms-txn-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.rms-txn-card-sub {
+  font-size: 0.78rem;
+  color: #6c757d;
+  margin: 0.2rem 0 0;
+}
+
+.rms-txn-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.rms-txn-form-grid--wide {
+  grid-template-columns: 1fr;
+}
+
+.rms-txn-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.35rem;
+}
+
+.rms-txn-input,
+.rms-txn-select,
+.rms-txn-textarea {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(61, 26, 100, 0.18);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #2c3e50;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rms-txn-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.rms-txn-input:focus,
+.rms-txn-select:focus,
+.rms-txn-textarea:focus {
+  outline: none;
+  border-color: rgba(61, 26, 100, 0.45);
+  box-shadow: 0 0 0 3px rgba(61, 26, 100, 0.08);
+}
+
+.rms-txn-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.rms-txn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rms-txn-btn-primary {
+  background: var(--rms-gradient);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(136, 18, 84, 0.22);
+}
+
+.rms-txn-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(136, 18, 84, 0.28);
+}
+
+.rms-txn-btn-secondary {
+  background: #fff;
+  color: var(--rms-purple);
+  border: 1px solid rgba(61, 26, 100, 0.22);
+}
+
+.rms-txn-btn-secondary:hover {
+  background: var(--rms-hover-tint);
+}
+
+.rms-txn-btn-outline {
+  background: transparent;
+  color: var(--rms-teal);
+  border: 1px solid rgba(20, 123, 122, 0.35);
+}
+
+.rms-txn-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.rms-txn-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #495057;
+  cursor: pointer;
+}
+
+.rms-txn-radio input {
+  accent-color: var(--rms-purple);
+}
+
+.rms-txn-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.rms-txn-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.rms-txn-table thead {
+  background: linear-gradient(135deg, rgba(61, 26, 100, 0.06) 0%, rgba(20, 123, 122, 0.08) 100%);
+}
+
+.rms-txn-table th {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--rms-purple);
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(61, 26, 100, 0.12);
+}
+
+.rms-txn-table td {
+  padding: 0.6rem 0.75rem;
+  color: #495057;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+.rms-txn-table tbody tr:hover {
+  background: rgba(61, 26, 100, 0.03);
+}
+
+.rms-txn-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #6c757d;
+}
+
+.rms-txn-empty i {
+  font-size: 2rem;
+  color: rgba(61, 26, 100, 0.25);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.rms-txn-split {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.rms-txn-date-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.rms-txn-date-row .rms-txn-field {
+  min-width: 160px;
+}
+
+@media (max-width: 992px) {
+  .rms-txn-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .rms-txn-page {
+    padding: 1rem;
+  }
+
+  .rms-txn-form-grid {
+    grid-template-columns: 1fr;
   }
 }

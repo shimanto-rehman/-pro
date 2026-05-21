@@ -4,10 +4,32 @@
   var sidebar = document.querySelector('.dashboard-sidebar');
   var overlay = document.querySelector('.sidebar-overlay');
   var expandToggle = document.getElementById('sidebarExpandToggle');
+  var mainContent = document.querySelector('.dashboard-content');
   var mq = window.matchMedia('(min-width: 769px)');
+
+  var txnNavItem = sidebar ? sidebar.querySelector('[data-subnav-id="nav-transaction-search-sub"]') : null;
+  var txnSubNav = document.getElementById('nav-transaction-search-sub');
+
+  function getEventElement(event) {
+    var target = event.target;
+    if (target && target.nodeType === 1) {
+      return target;
+    }
+    return target && target.parentElement ? target.parentElement : null;
+  }
 
   function isDesktop() {
     return mq.matches;
+  }
+
+  function isDashboardPage() {
+    var page = document.body.getAttribute('data-page');
+    return !page || page === 'dashboard';
+  }
+
+  function isTxnSearchPage() {
+    var page = document.body.getAttribute('data-page') || '';
+    return page.indexOf('transaction-search') === 0;
   }
 
   function closeAllSubnavs() {
@@ -19,6 +41,14 @@
     sidebar.querySelectorAll('.sidebar-subnav.subnav-open').forEach(function (sub) {
       sub.classList.remove('subnav-open');
     });
+  }
+
+  function openTxnSubnav() {
+    if (!txnNavItem || !txnSubNav) return;
+    txnNavItem.classList.add('active');
+    txnNavItem.classList.add('nav-open');
+    txnNavItem.setAttribute('aria-expanded', 'true');
+    txnSubNav.classList.add('subnav-open');
   }
 
   function updateToggleUi() {
@@ -41,6 +71,9 @@
     sidebar.querySelectorAll('.nav-item.active').forEach(function (item) {
       item.classList.remove('active');
       item.removeAttribute('aria-current');
+    });
+    sidebar.querySelectorAll('.subnav-item.active').forEach(function (item) {
+      item.classList.remove('active');
     });
     dashboardLink.classList.add('active');
     dashboardLink.setAttribute('aria-current', 'page');
@@ -81,8 +114,10 @@
       navItem.classList.add('active');
       navItem.setAttribute('aria-expanded', 'true');
       subNav.classList.add('subnav-open');
-    } else {
+    } else if (isDashboardPage()) {
       setDashboardActive();
+    } else if (isTxnSearchPage()) {
+      openTxnSubnav();
     }
   }
 
@@ -91,16 +126,36 @@
     sidebar.classList.remove('show');
     sidebar.classList.remove('sidebar-expanded');
     if (overlay) overlay.classList.remove('show');
-    closeAllSubnavs();
+    if (isDashboardPage()) {
+      closeAllSubnavs();
+    }
+  }
+
+  function openMobileSidebar() {
+    if (!sidebar || !overlay) return;
+    sidebar.classList.add('show');
+    sidebar.classList.add('sidebar-expanded');
+    overlay.classList.add('show');
+    if (isTxnSearchPage()) {
+      openTxnSubnav();
+    }
   }
 
   function handleOutsideSidebarClick(event) {
-    if (!sidebar || sidebar.contains(event.target)) return;
-    if (hamburgerBtn && hamburgerBtn.contains(event.target)) return;
+    if (!sidebar) return;
+
+    var target = getEventElement(event);
+    if (target) {
+      if (hamburgerBtn && hamburgerBtn.contains(target)) return;
+      if (target.closest('.dashboard-header')) return;
+    }
 
     if (isDesktop()) {
       if (sidebar.classList.contains('sidebar-expanded')) {
         collapseSidebar();
+        if (isTxnSearchPage()) {
+          openTxnSubnav();
+        }
       }
       return;
     }
@@ -110,18 +165,27 @@
     }
   }
 
-  if (hamburgerBtn && sidebar && overlay) {
-    hamburgerBtn.addEventListener('click', function () {
-      sidebar.classList.toggle('show');
-      overlay.classList.toggle('show');
+  function initTxnPageNav() {
+    if (!isTxnSearchPage() || !sidebar) return;
 
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        if (sidebar.classList.contains('show')) {
-          sidebar.classList.add('sidebar-expanded');
-        } else {
-          sidebar.classList.remove('sidebar-expanded');
-          closeAllSubnavs();
-        }
+    if (isDesktop()) {
+      expandSidebar();
+      openTxnSubnav();
+      return;
+    }
+
+    sidebar.classList.remove('sidebar-expanded');
+    updateToggleUi();
+  }
+
+  if (hamburgerBtn && sidebar && overlay) {
+    hamburgerBtn.addEventListener('click', function (event) {
+      event.stopPropagation();
+
+      if (sidebar.classList.contains('show')) {
+        closeMobileSidebar();
+      } else {
+        openMobileSidebar();
       }
     });
 
@@ -137,6 +201,9 @@
 
       if (sidebar.classList.contains('sidebar-expanded')) {
         collapseSidebar();
+        if (isTxnSearchPage()) {
+          openTxnSubnav();
+        }
       } else {
         expandSidebar();
       }
@@ -145,33 +212,55 @@
 
   if (sidebar) {
     sidebar.addEventListener('click', function (event) {
-      var dashboardLink = event.target.closest('.nav-item-link');
-      if (dashboardLink && sidebar.contains(dashboardLink)) {
-        closeAllSubnavs();
-        setDashboardActive();
-        var onDashboard = window.location.pathname.endsWith('index.html') ||
-          window.location.pathname.endsWith('/') ||
-          window.location.pathname.endsWith('\\');
-        if (onDashboard) {
-          event.preventDefault();
-        }
+      var target = getEventElement(event);
+      if (!target) return;
+
+      if (target.closest('.subnav-item')) {
         return;
       }
 
-      var navItem = event.target.closest('.nav-item.nav-has-children');
+      var dashboardLink = target.closest('.nav-item-link');
+      if (dashboardLink && sidebar.contains(dashboardLink)) {
+        closeAllSubnavs();
+        return;
+      }
+
+      var navItem = target.closest('.nav-item.nav-has-children');
       if (!navItem || !sidebar.contains(navItem)) return;
 
       event.preventDefault();
       toggleNavItem(navItem);
     });
 
-    var hasMenuActive = sidebar.querySelector('.nav-item.nav-has-children.active');
-    if (!hasMenuActive) {
-      setDashboardActive();
+    if (isDashboardPage()) {
+      var hasMenuActive = sidebar.querySelector('.nav-item.nav-has-children.active');
+      if (!hasMenuActive) {
+        setDashboardActive();
+      }
+    } else {
+      initTxnPageNav();
     }
-
-    document.addEventListener('click', handleOutsideSidebarClick);
   }
+
+  if (mainContent && sidebar) {
+    mainContent.addEventListener('click', handleOutsideSidebarClick);
+  }
+
+  mq.addEventListener('change', function () {
+    if (isDesktop()) {
+      sidebar.classList.remove('show');
+      if (overlay) overlay.classList.remove('show');
+      if (isTxnSearchPage()) {
+        initTxnPageNav();
+      }
+    } else if (isTxnSearchPage()) {
+      sidebar.classList.remove('sidebar-expanded');
+      sidebar.classList.remove('show');
+      if (overlay) overlay.classList.remove('show');
+      openTxnSubnav();
+      updateToggleUi();
+    }
+  });
 
   updateToggleUi();
 })();

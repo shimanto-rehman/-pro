@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RMS - Remittance Management System</title>
+    <title>Pending List - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
   </head>
-  <body class="dashboard-page">
+  <body class="dashboard-page" data-page="transaction-search-pending">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -23,9 +23,7 @@
           type="button"
           class="sidebar-expand-toggle"
           id="sidebarExpandToggle"
-          aria-expanded="false"
-          aria-controls="dashboardSidebarNav"
-          title="Expand sidebar"
+          aria-expanded="false" aria-controls="dashboardSidebarNav" title="Expand sidebar"
         >
           <i class="bi bi-chevron-right toggle-icon-when-collapsed" aria-hidden="true"></i>
           <i class="bi bi-chevron-left toggle-icon-when-expanded" aria-hidden="true"></i>
@@ -33,8 +31,8 @@
         </button>
         <nav class="sidebar-nav" id="dashboardSidebarNav">
 
-          <!-- Dashboard â€” sole link item (no submenu) -->
-          <a href="index.html" class="nav-item nav-item-link active" id="navDashboardLink" aria-current="page">
+          <!-- Dashboard — sole link item (no submenu) -->
+          <a href="index.html" class="nav-item nav-item-link" id="navDashboardLink">
             <i class="bi bi-speedometer2 nav-item-icon" aria-hidden="true"></i>
             <span>Dashboard</span>
           </a>
@@ -49,7 +47,7 @@
             <a href="transaction-search-pin.html" class="subnav-item">Search By PIN</a>
             <a href="transaction-search-bulk.html" class="subnav-item">Search Bulk</a>
             <a href="transaction-search-api-log.html" class="subnav-item">Search API Log</a>
-            <a href="transaction-search-pending.html" class="subnav-item">Pending List</a>
+            <a href="transaction-search-pending.html" class="subnav-item active">Pending List</a>
           </div>
 
           <!-- BEFTN Principle -->
@@ -273,10 +271,8 @@
 
       <!-- Sidebar Overlay for Mobile -->
       <div class="sidebar-overlay"></div>
-
       <!-- Main Content Area -->
       <main class="dashboard-content">
-        <!-- Header -->
         <header class="dashboard-header">
           <div class="header-top">
             <div class="header-right">
@@ -360,21 +356,21 @@
                         <span class="notification-dot" aria-hidden="true"></span>
                         <div class="notification-body">
                           <div class="notification-title">Payment batch approved</div>
-                          <div class="notification-meta">Batch #54329 Â· 2 min ago</div>
+                          <div class="notification-meta">Batch #54329 · 2 min ago</div>
                         </div>
                       </a>
                       <a href="#" class="notification-item unread">
                         <span class="notification-dot" aria-hidden="true"></span>
                         <div class="notification-body">
                           <div class="notification-title">New challan pending review</div>
-                          <div class="notification-meta">Ref CH-2026-014 Â· 1 hr ago</div>
+                          <div class="notification-meta">Ref CH-2026-014 · 1 hr ago</div>
                         </div>
                       </a>
                       <a href="#" class="notification-item">
                         <span class="notification-dot" aria-hidden="true"></span>
                         <div class="notification-body">
                           <div class="notification-title">Scheduled maintenance</div>
-                          <div class="notification-meta">Sunday 02:00â€“04:00</div>
+                          <div class="notification-meta">Sunday 02:00–04:00</div>
                         </div>
                       </a>
                     </div>
@@ -422,228 +418,110 @@
           </div>
         </header>
 
-        <div class="rms-dashboard-home">
-          <!-- Hero -->
-          <section class="rms-dash-hero">
-            <div class="rms-dash-hero-text">
-              <p class="rms-dash-eyebrow">Remittance Management System</p>
-              <h1 class="rms-dash-title">Monthly Transaction Overview</h1>
-              <p class="rms-dash-subtitle">Live channel performance for <strong>May 2026</strong> Â· Updated today at 10:42 AM</p>
+        <div class="rms-txn-page">
+          <header class="rms-txn-hero">
+            <div>
+              <p class="rms-txn-breadcrumb">Transaction Search Status <i class="bi bi-chevron-right" aria-hidden="true"></i> Pending List</p>
+              <h1 class="rms-txn-title">Pending List</h1>
+              <p class="rms-txn-desc">Monitor pending transactions by party, exchange house, and processing mode.</p>
             </div>
-            <div class="rms-dash-hero-actions">
-              <span class="rms-dash-pill"><i class="bi bi-calendar3" aria-hidden="true"></i> May 2026</span>
-              <button type="button" class="rms-dash-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export MIS</button>
+            <button type="button" class="rms-txn-btn rms-txn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+          </header>
+
+          <div class="rms-txn-split">
+            <section class="rms-txn-card">
+              <div class="rms-txn-card-head">
+                <h2 class="rms-txn-card-title">Party summary</h2>
+              </div>
+              <div class="rms-txn-table-wrap">
+                <table class="rms-txn-table">
+                  <thead>
+                    <tr>
+                      <th>Party ID</th>
+                      <th>ExH</th>
+                      <th>Count</th>
+                      <th>Txn Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="4"><div class="rms-txn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No data</div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="rms-txn-card">
+              <div class="rms-txn-card-head">
+                <h2 class="rms-txn-card-title">Exchange house detail</h2>
+              </div>
+              <div class="rms-txn-table-wrap">
+                <table class="rms-txn-table">
+                  <thead>
+                    <tr>
+                      <th>ExH</th>
+                      <th>Ref No</th>
+                      <th>Amount</th>
+                      <th>Request Time</th>
+                      <th>Txn Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="5"><div class="rms-txn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No data</div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <section class="rms-txn-card">
+            <div class="rms-txn-card-head">
+              <div>
+                <h2 class="rms-txn-card-title">Date range filter</h2>
+                <p class="rms-txn-card-sub">Filter pending list by request date</p>
+              </div>
+            </div>
+            <div class="rms-txn-date-row">
+              <div class="rms-txn-field">
+                <label for="pendingFrom">From date</label>
+                <input type="date" id="pendingFrom" class="rms-txn-input">
+              </div>
+              <div class="rms-txn-field">
+                <label for="pendingTo">To date</label>
+                <input type="date" id="pendingTo" class="rms-txn-input">
+              </div>
+              <div class="rms-txn-actions">
+                <button type="button" class="rms-txn-btn rms-txn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
+                <button type="button" class="rms-txn-btn rms-txn-btn-secondary">Clear</button>
+              </div>
             </div>
           </section>
 
-          <!-- KPI summary -->
-          <section class="rms-kpi-grid" aria-label="Summary statistics">
-            <article class="rms-kpi-card">
-              <div class="rms-kpi-icon rms-kpi-icon-gradient"><i class="bi bi-layers" aria-hidden="true"></i></div>
-              <div class="rms-kpi-body">
-                <span class="rms-kpi-label">Total transactions</span>
-                <strong class="rms-kpi-value">69,553</strong>
-                <span class="rms-kpi-trend rms-trend-up"><i class="bi bi-arrow-up-right" aria-hidden="true"></i> 6.4% vs last month</span>
+          <section class="rms-txn-card">
+            <div class="rms-txn-card-head">
+              <div>
+                <h2 class="rms-txn-card-title">Pending by mode</h2>
+                <p class="rms-txn-card-sub">Processed vs pending breakdown</p>
               </div>
-            </article>
-            <article class="rms-kpi-card">
-              <div class="rms-kpi-icon rms-kpi-icon-teal"><i class="bi bi-check2-circle" aria-hidden="true"></i></div>
-              <div class="rms-kpi-body">
-                <span class="rms-kpi-label">Successful</span>
-                <strong class="rms-kpi-value">64,812</strong>
-                <span class="rms-kpi-trend rms-trend-up">93.2% success rate</span>
-              </div>
-            </article>
-            <article class="rms-kpi-card">
-              <div class="rms-kpi-icon rms-kpi-icon-purple"><i class="bi bi-hourglass-split" aria-hidden="true"></i></div>
-              <div class="rms-kpi-body">
-                <span class="rms-kpi-label">Pending review</span>
-                <strong class="rms-kpi-value">3,241</strong>
-                <span class="rms-kpi-trend">Across all channels</span>
-              </div>
-            </article>
-            <article class="rms-kpi-card">
-              <div class="rms-kpi-icon rms-kpi-icon-red"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i></div>
-              <div class="rms-kpi-body">
-                <span class="rms-kpi-label">Failed / returned</span>
-                <strong class="rms-kpi-value">1,500</strong>
-                <span class="rms-kpi-trend rms-trend-down"><i class="bi bi-arrow-down-right" aria-hidden="true"></i> 0.8% vs last month</span>
-              </div>
-            </article>
-          </section>
-
-          <!-- 4 channel charts -->
-          <section class="rms-channels-grid" aria-label="Channel transaction charts">
-
-            <!-- NPSB â€” vertical bar chart -->
-            <article class="rms-channel-card rms-chart-bars">
-              <header class="rms-channel-header">
-                <div>
-                  <span class="rms-channel-tag rms-tag-teal">NPSB</span>
-                  <h2 class="rms-channel-title">NPSB Channel</h2>
-                </div>
-                <div class="rms-channel-total">
-                  <strong>12,847</strong>
-                  <span>txn this month</span>
-                </div>
-              </header>
-              <p class="rms-channel-desc">Weekly volume breakdown</p>
-              <div class="rms-bar-chart" role="img" aria-label="NPSB weekly bars: W1 2480, W2 3120, W3 3890, W4 3357">
-                <div class="rms-bar-col">
-                  <div class="rms-bar-fill" style="--h: 64%;"><span class="rms-bar-val">2,480</span></div>
-                  <span class="rms-bar-label">W1</span>
-                </div>
-                <div class="rms-bar-col">
-                  <div class="rms-bar-fill" style="--h: 81%;"><span class="rms-bar-val">3,120</span></div>
-                  <span class="rms-bar-label">W2</span>
-                </div>
-                <div class="rms-bar-col">
-                  <div class="rms-bar-fill" style="--h: 100%;"><span class="rms-bar-val">3,890</span></div>
-                  <span class="rms-bar-label">W3</span>
-                </div>
-                <div class="rms-bar-col">
-                  <div class="rms-bar-fill" style="--h: 86%;"><span class="rms-bar-val">3,357</span></div>
-                  <span class="rms-bar-label">W4</span>
-                </div>
-              </div>
-              <footer class="rms-channel-footer rms-trend-up"><i class="bi bi-arrow-up-right" aria-hidden="true"></i> +8.2% from April</footer>
-            </article>
-
-            <!-- BEFTN â€” SVG area line chart -->
-            <article class="rms-channel-card rms-chart-line">
-              <header class="rms-channel-header">
-                <div>
-                  <span class="rms-channel-tag rms-tag-purple">BEFTN</span>
-                  <h2 class="rms-channel-title">BEFTN Channel</h2>
-                </div>
-                <div class="rms-channel-total">
-                  <strong>28,560</strong>
-                  <span>txn this month</span>
-                </div>
-              </header>
-              <p class="rms-channel-desc">Processing trend (weekly)</p>
-              <div class="rms-line-chart-wrap">
-                <svg class="rms-line-chart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="beftnArea" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#3D1A64" stop-opacity="0.35"/>
-                      <stop offset="100%" stop-color="#3D1A64" stop-opacity="0.02"/>
-                    </linearGradient>
-                  </defs>
-                  <path class="rms-line-area" d="M0,95 L80,72 L160,58 L240,48 L320,35 L320,120 L0,120 Z" fill="url(#beftnArea)"/>
-                  <polyline class="rms-line-stroke" points="0,95 80,72 160,58 240,48 320,35" fill="none" stroke="#3D1A64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="0" cy="95" r="3.5" fill="#fff" stroke="#3D1A64" stroke-width="2"/>
-                  <circle cx="80" cy="72" r="3.5" fill="#fff" stroke="#3D1A64" stroke-width="2"/>
-                  <circle cx="160" cy="58" r="3.5" fill="#fff" stroke="#3D1A64" stroke-width="2"/>
-                  <circle cx="240" cy="48" r="3.5" fill="#fff" stroke="#3D1A64" stroke-width="2"/>
-                  <circle cx="320" cy="35" r="4" fill="#3D1A64" stroke="#fff" stroke-width="2"/>
-                </svg>
-                <div class="rms-line-labels">
-                  <span>W1</span><span>W2</span><span>W3</span><span>W4</span><span>W5</span>
-                </div>
-              </div>
-              <footer class="rms-channel-footer rms-trend-up"><i class="bi bi-arrow-up-right" aria-hidden="true"></i> +3.1% Â· highest volume channel</footer>
-            </article>
-
-            <!-- WALLETS â€” donut chart -->
-            <article class="rms-channel-card rms-chart-donut">
-              <header class="rms-channel-header">
-                <div>
-                  <span class="rms-channel-tag rms-tag-red">Wallets</span>
-                  <h2 class="rms-channel-title">Wallet Channel</h2>
-                </div>
-                <div class="rms-channel-total">
-                  <strong>19,234</strong>
-                  <span>txn this month</span>
-                </div>
-              </header>
-              <p class="rms-channel-desc">Status composition</p>
-              <div class="rms-donut-layout">
-                <div class="rms-donut" style="--seg-success: 78; --seg-pending: 14; --seg-failed: 8;" role="img" aria-label="Wallet transactions: 78% success, 14% pending, 8% failed">
-                  <div class="rms-donut-hole">
-                    <strong>78%</strong>
-                    <span>Success</span>
-                  </div>
-                </div>
-                <ul class="rms-donut-legend">
-                  <li><span class="rms-legend-dot rms-dot-success"></span> Successful <strong>15,002</strong></li>
-                  <li><span class="rms-legend-dot rms-dot-pending"></span> Pending <strong>2,693</strong></li>
-                  <li><span class="rms-legend-dot rms-dot-failed"></span> Failed <strong>1,539</strong></li>
-                </ul>
-              </div>
-              <footer class="rms-channel-footer rms-trend-up"><i class="bi bi-arrow-up-right" aria-hidden="true"></i> +15.4% Â· fastest growing</footer>
-            </article>
-
-            <!-- MTB Transfer â€” horizontal progress bars -->
-            <article class="rms-channel-card rms-chart-hbar">
-              <header class="rms-channel-header">
-                <div>
-                  <span class="rms-channel-tag rms-tag-slate">MTB Transfer</span>
-                  <h2 class="rms-channel-title">MTB A/C Transfer</h2>
-                </div>
-                <div class="rms-channel-total">
-                  <strong>8,912</strong>
-                  <span>txn this month</span>
-                </div>
-              </header>
-              <p class="rms-channel-desc">Principle vs incentive split</p>
-              <div class="rms-hbar-list">
-                <div class="rms-hbar-row">
-                  <div class="rms-hbar-meta">
-                    <span>Principle</span>
-                    <strong>6,417</strong>
-                  </div>
-                  <div class="rms-hbar-track"><div class="rms-hbar-fill rms-fill-slate" style="width: 72%;"></div></div>
-                  <span class="rms-hbar-pct">72%</span>
-                </div>
-                <div class="rms-hbar-row">
-                  <div class="rms-hbar-meta">
-                    <span>Incentive</span>
-                    <strong>2,495</strong>
-                  </div>
-                  <div class="rms-hbar-track"><div class="rms-hbar-fill rms-fill-teal" style="width: 28%;"></div></div>
-                  <span class="rms-hbar-pct">28%</span>
-                </div>
-                <div class="rms-hbar-row">
-                  <div class="rms-hbar-meta">
-                    <span>Same-day release</span>
-                    <strong>7,204</strong>
-                  </div>
-                  <div class="rms-hbar-track"><div class="rms-hbar-fill rms-fill-purple" style="width: 81%;"></div></div>
-                  <span class="rms-hbar-pct">81%</span>
-                </div>
-                <div class="rms-hbar-row">
-                  <div class="rms-hbar-meta">
-                    <span>Queue backlog</span>
-                    <strong>186</strong>
-                  </div>
-                  <div class="rms-hbar-track"><div class="rms-hbar-fill rms-fill-red" style="width: 12%;"></div></div>
-                  <span class="rms-hbar-pct">2%</span>
-                </div>
-              </div>
-              <footer class="rms-channel-footer rms-trend-down"><i class="bi bi-arrow-down-right" aria-hidden="true"></i> âˆ’2.3% from April</footer>
-            </article>
-          </section>
-
-          <!-- Bottom row: share + activity -->
-          <section class="rms-dash-bottom">
-            <article class="rms-panel rms-panel-share">
-              <h3 class="rms-panel-title">Channel share of total volume</h3>
-              <div class="rms-share-bar" role="img" aria-label="BEFTN 41%, Wallets 28%, NPSB 18%, MTB 13%">
-                <span class="rms-share-seg rms-seg-beftn" style="width: 41%;" title="BEFTN 41%">BEFTN 41%</span>
-                <span class="rms-share-seg rms-seg-wallets" style="width: 28%;" title="Wallets 28%">28%</span>
-                <span class="rms-share-seg rms-seg-npsb" style="width: 18%;" title="NPSB 18%">18%</span>
-                <span class="rms-share-seg rms-seg-mtb" style="width: 13%;" title="MTB 13%">13%</span>
-              </div>
-              <ul class="rms-share-legend">
-                <li><span class="rms-legend-dot rms-dot-purple"></span> BEFTN</li>
-                <li><span class="rms-legend-dot rms-dot-red"></span> Wallets</li>
-                <li><span class="rms-legend-dot rms-dot-teal"></span> NPSB</li>
-                <li><span class="rms-legend-dot rms-dot-slate"></span> MTB Transfer</li>
-              </ul>
-            </article>
+            </div>
+            <div class="rms-txn-table-wrap">
+              <table class="rms-txn-table">
+                <thead>
+                  <tr>
+                    <th>Mode</th>
+                    <th>Party ID</th>
+                    <th>Ex House</th>
+                    <th>Processed</th>
+                    <th>Pending</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="5"><div class="rms-txn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No pending records for the selected range.</div></td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
         </div>
+
       </main>
     </div>
 
