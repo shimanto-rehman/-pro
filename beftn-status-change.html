@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pending List - RMS</title>
+    <title>BEFTN Status Change - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/fonts/fonts.css">
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <link rel="stylesheet" href="assets/css/beftn.css" />
   </head>
-  <body class="dashboard-page" data-page="transaction-search-pending">
+  <body class="dashboard-page" data-page="beftn-status-change">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -47,21 +48,21 @@
             <a href="transaction-search-pin.html" class="subnav-item">Search By PIN</a>
             <a href="transaction-search-bulk.html" class="subnav-item">Search Bulk</a>
             <a href="transaction-search-api-log.html" class="subnav-item">Search API Log</a>
-            <a href="transaction-search-pending.html" class="subnav-item active">Pending List</a>
+            <a href="transaction-search-pending.html" class="subnav-item">Pending List</a>
           </div>
 
           <!-- BEFTN -->
-          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-beftn-sub">
+          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-beftn-sub" aria-expanded="true">
             <i class="bi bi-bank nav-item-icon" aria-hidden="true"></i>
             <span>BEFTN</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle BEFTN sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav" id="nav-beftn-sub">
+          <div class="sidebar-subnav subnav-open" id="nav-beftn-sub">
             <a href="#" class="subnav-item">Processing Queue</a>
             <a href="beftn-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="beftn-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="beftn-cancellation.html" class="subnav-item">Cancellation</a>
-            <a href="beftn-status-change.html" class="subnav-item">Status Change</a>
+            <a href="beftn-status-change.html" class="subnav-item active">Status Change</a>
           </div>
 
           <!-- NPSB -->
@@ -352,108 +353,232 @@
           </div>
         </header>
 
-        <div class="rms-txn-page">
-          <header class="rms-txn-hero">
+        
+        <div class="beftn-module-page">
+          <header class="beftn-module-hero">
             <div>
-              <p class="rms-txn-breadcrumb">Transaction Search Status <i class="bi bi-chevron-right" aria-hidden="true"></i> Pending List</p>
-              <h1 class="rms-txn-title">Pending List</h1>
-              <p class="rms-txn-desc">Monitor pending transactions by party, exchange house, and processing mode.</p>
+              <p class="beftn-module-breadcrumb">BEFTN <i class="bi bi-chevron-right" aria-hidden="true"></i> Status Change</p>
+              <h1 class="beftn-module-title">BEFTN — Status Change</h1>
+              <p class="beftn-module-desc">Update payment status for BEFTN principle and incentive transactions.</p>
             </div>
-            <button type="button" class="rms-txn-btn rms-txn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
           </header>
 
-          <div class="rms-txn-split">
-            <section class="rms-txn-card">
-              <div class="rms-txn-card-head">
-                <h2 class="rms-txn-card-title">Party summary</h2>
+          <div class="beftn-type-nav-wrap">
+            <p class="beftn-type-nav-label">Select transaction type</p>
+            <nav class="beftn-type-nav" aria-label="Transaction type">
+              <button type="button" class="beftn-type-nav-btn is-active" data-beftn-type="principle" aria-selected="true">Principle</button>
+              <button type="button" class="beftn-type-nav-btn" data-beftn-type="incentive" aria-selected="false">Incentive</button>
+            </nav>
+          </div>
+
+          
+          <div class="beftn-type-panel" data-beftn-panel="principle">
+            <section class="beftn-module-card">
+              <div class="beftn-filter-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangepriFromDate">From Date</label>
+                  <input type="date" id="statuschangepriFromDate" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangepriToDate">To Date</label>
+                  <input type="date" id="statuschangepriToDate" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangepriType">Transaction Type</label>
+                  <select id="statuschangepriType" class="beftn-select">
+                    <option value="">— Select —</option>
+                    <option>All Types</option><option>Standard</option><option>Express</option>
+                  </select>
+                </div>
               </div>
-              <div class="rms-txn-table-wrap">
-                <table class="rms-txn-table">
-                  <thead>
-                    <tr>
-                      <th>Party ID</th>
-                      <th>ExH</th>
-                      <th>Count</th>
-                      <th>Txn Type</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td colspan="4"><div class="rms-txn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No data</div></td></tr>
-                  </tbody>
-                </table>
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
               </div>
             </section>
 
-            <section class="rms-txn-card">
-              <div class="rms-txn-card-head">
-                <h2 class="rms-txn-card-title">Exchange house detail</h2>
+            <section class="beftn-module-card">
+              <div class="beftn-field beftn-field--full">
+                <label class="beftn-label-block" for="statuschangepriBulkPin">PIN / Reference</label>
+                <textarea id="statuschangepriBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
               </div>
-              <div class="rms-txn-table-wrap">
-                <table class="rms-txn-table">
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-action-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangepriPaymentStatus">Payment Status</label>
+                  <select id="statuschangepriPaymentStatus" class="beftn-select">
+                    <option selected>AML Checked Successful</option>
+                    <option>Pending</option>
+                    <option>Released</option>
+                    <option>Failed</option>
+                  </select>
+                </div>
+                
+                
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangepriNewStatus">New Status</label>
+                  <select id="statuschangepriNewStatus" class="beftn-select">
+                    <option value="">— Select new status —</option>
+                    <option>AML Checked Successful</option>
+                    <option>Released</option>
+                    <option>Failed Release</option>
+                    <option>Cancelled</option>
+                  </select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangepriRemarks">Remarks</label>
+                  <input type="text" id="statuschangepriRemarks" class="beftn-input" placeholder="Enter remarks">
+                </div>
+              </div>
+              <div class="beftn-module-actions beftn-module-actions--between">
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Update Status</button>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-module-card-head">
+                <div>
+                  <h2 class="beftn-module-card-title">Results — Principle</h2>
+                  <p class="beftn-module-card-sub">Status Change output for principle transactions</p>
+                </div>
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+              </div>
+              <div class="beftn-table-wrap">
+                <table class="beftn-table">
                   <thead>
                     <tr>
-                      <th>ExH</th>
-                      <th>Ref No</th>
-                      <th>Amount</th>
-                      <th>Request Time</th>
-                      <th>Txn Type</th>
+                      <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
+                      <th>Exchange House</th>
+                      <th>PIN No</th>
+                      <th>Sender Name</th>
+                      <th>Sender Address</th>
+                      <th>Sender Country</th>
+                      <th>Beneficiary Name</th>
+                      <th>Beneficiary Account</th>
+                      <th>Principal Amount</th>
+                      <th>Source of Fund</th>
+                      <th>Purpose of Fund</th>
+                      <th>Transaction Date</th>
+                      <th>Payment Status</th>
+                      <th>Sender Nationality</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td colspan="5"><div class="rms-txn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No data</div></td></tr>
+                    <tr><td colspan="14"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No principle records found. Run a search to view results.</div></td></tr>
                   </tbody>
                 </table>
               </div>
             </section>
           </div>
+          
+          <div class="beftn-type-panel" data-beftn-panel="incentive" hidden>
+            <section class="beftn-module-card">
+              <div class="beftn-filter-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangeincFromDate">From Date</label>
+                  <input type="date" id="statuschangeincFromDate" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangeincToDate">To Date</label>
+                  <input type="date" id="statuschangeincToDate" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangeincType">Incentive Type</label>
+                  <select id="statuschangeincType" class="beftn-select">
+                    <option value="">— Select —</option>
+                    <option>All Types</option><option>Regular Incentive</option><option>Special Incentive</option>
+                  </select>
+                </div>
+              </div>
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
+              </div>
+            </section>
 
-          <section class="rms-txn-card">
-            <div class="rms-txn-card-head">
-              <div>
-                <h2 class="rms-txn-card-title">Date range filter</h2>
-                <p class="rms-txn-card-sub">Filter pending list by request date</p>
+            <section class="beftn-module-card">
+              <div class="beftn-field beftn-field--full">
+                <label class="beftn-label-block" for="statuschangeincBulkPin">PIN / Reference</label>
+                <textarea id="statuschangeincBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
               </div>
-            </div>
-            <div class="rms-txn-date-row">
-              <div class="rms-txn-field">
-                <label for="pendingFrom">From date</label>
-                <input type="date" id="pendingFrom" class="rms-txn-input">
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
               </div>
-              <div class="rms-txn-field">
-                <label for="pendingTo">To date</label>
-                <input type="date" id="pendingTo" class="rms-txn-input">
-              </div>
-              <div class="rms-txn-actions">
-                <button type="button" class="rms-txn-btn rms-txn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-                <button type="button" class="rms-txn-btn rms-txn-btn-secondary">Clear</button>
-              </div>
-            </div>
-          </section>
+            </section>
 
-          <section class="rms-txn-card">
-            <div class="rms-txn-card-head">
-              <div>
-                <h2 class="rms-txn-card-title">Pending by mode</h2>
-                <p class="rms-txn-card-sub">Processed vs pending breakdown</p>
+            <section class="beftn-module-card">
+              <div class="beftn-action-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangeincPaymentStatus">Payment Status</label>
+                  <select id="statuschangeincPaymentStatus" class="beftn-select">
+                    <option selected>AML Checked Successful</option>
+                    <option>Pending</option>
+                    <option>Released</option>
+                    <option>Failed</option>
+                  </select>
+                </div>
+                
+                
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangeincNewStatus">New Status</label>
+                  <select id="statuschangeincNewStatus" class="beftn-select">
+                    <option value="">— Select new status —</option>
+                    <option>AML Checked Successful</option>
+                    <option>Released</option>
+                    <option>Failed Release</option>
+                    <option>Cancelled</option>
+                  </select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="statuschangeincRemarks">Remarks</label>
+                  <input type="text" id="statuschangeincRemarks" class="beftn-input" placeholder="Enter remarks">
+                </div>
               </div>
-            </div>
-            <div class="rms-txn-table-wrap">
-              <table class="rms-txn-table">
-                <thead>
-                  <tr>
-                    <th>Mode</th>
-                    <th>Party ID</th>
-                    <th>Ex House</th>
-                    <th>Processed</th>
-                    <th>Pending</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td colspan="5"><div class="rms-txn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No pending records for the selected range.</div></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+              <div class="beftn-module-actions beftn-module-actions--between">
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Update Status</button>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-module-card-head">
+                <div>
+                  <h2 class="beftn-module-card-title">Results — Incentive</h2>
+                  <p class="beftn-module-card-sub">Status Change output for incentive transactions</p>
+                </div>
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+              </div>
+              <div class="beftn-table-wrap">
+                <table class="beftn-table">
+                  <thead>
+                    <tr>
+                      <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
+                      <th>Exchange House</th>
+                      <th>PIN No</th>
+                      <th>Sender Name</th>
+                      <th>Sender Address</th>
+                      <th>Sender Country</th>
+                      <th>Beneficiary Name</th>
+                      <th>Beneficiary Account</th>
+                      <th>Incentive Amount</th>
+                      <th>Source of Fund</th>
+                      <th>Purpose of Fund</th>
+                      <th>Transaction Date</th>
+                      <th>Payment Status</th>
+                      <th>Sender Nationality</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="14"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No incentive records found. Run a search to view results.</div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
         </div>
 
       </main>
@@ -463,5 +588,6 @@
     <script src="assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/beftn-page.js"></script>
   </body>
 </html>

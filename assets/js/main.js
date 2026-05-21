@@ -9,6 +9,8 @@
 
   var txnNavItem = sidebar ? sidebar.querySelector('[data-subnav-id="nav-transaction-search-sub"]') : null;
   var txnSubNav = document.getElementById('nav-transaction-search-sub');
+  var beftnNavItem = sidebar ? sidebar.querySelector('[data-subnav-id="nav-beftn-sub"]') : null;
+  var beftnSubNav = document.getElementById('nav-beftn-sub');
 
   function getEventElement(event) {
     var target = event.target;
@@ -32,6 +34,11 @@
     return page.indexOf('transaction-search') === 0;
   }
 
+  function isBeftnPage() {
+    var page = document.body.getAttribute('data-page') || '';
+    return page.indexOf('beftn-') === 0;
+  }
+
   function closeAllSubnavs() {
     if (!sidebar) return;
     sidebar.querySelectorAll('.nav-item.nav-open').forEach(function (item) {
@@ -49,6 +56,26 @@
     txnNavItem.classList.add('nav-open');
     txnNavItem.setAttribute('aria-expanded', 'true');
     txnSubNav.classList.add('subnav-open');
+  }
+
+  function openBeftnSubnav() {
+    if (!beftnNavItem || !beftnSubNav) return;
+    beftnNavItem.classList.add('active');
+    beftnNavItem.classList.add('nav-open');
+    beftnNavItem.setAttribute('aria-expanded', 'true');
+    beftnSubNav.classList.add('subnav-open');
+  }
+
+  function isModuleSubnavPage() {
+    return isTxnSearchPage() || isBeftnPage();
+  }
+
+  function openCurrentModuleSubnav() {
+    if (isTxnSearchPage()) {
+      openTxnSubnav();
+    } else if (isBeftnPage()) {
+      openBeftnSubnav();
+    }
   }
 
   function updateToggleUi() {
@@ -116,8 +143,8 @@
       subNav.classList.add('subnav-open');
     } else if (isDashboardPage()) {
       setDashboardActive();
-    } else if (isTxnSearchPage()) {
-      openTxnSubnav();
+    } else if (isModuleSubnavPage()) {
+      openCurrentModuleSubnav();
     }
   }
 
@@ -136,8 +163,8 @@
     sidebar.classList.add('show');
     sidebar.classList.add('sidebar-expanded');
     overlay.classList.add('show');
-    if (isTxnSearchPage()) {
-      openTxnSubnav();
+    if (isModuleSubnavPage()) {
+      openCurrentModuleSubnav();
     }
   }
 
@@ -153,8 +180,8 @@
     if (isDesktop()) {
       if (sidebar.classList.contains('sidebar-expanded')) {
         collapseSidebar();
-        if (isTxnSearchPage()) {
-          openTxnSubnav();
+        if (isModuleSubnavPage()) {
+          openCurrentModuleSubnav();
         }
       }
       return;
@@ -165,12 +192,12 @@
     }
   }
 
-  function initTxnPageNav() {
-    if (!isTxnSearchPage() || !sidebar) return;
+  function initModulePageNav() {
+    if (!isModuleSubnavPage() || !sidebar) return;
 
     if (isDesktop()) {
       expandSidebar();
-      openTxnSubnav();
+      openCurrentModuleSubnav();
       return;
     }
 
@@ -201,8 +228,8 @@
 
       if (sidebar.classList.contains('sidebar-expanded')) {
         collapseSidebar();
-        if (isTxnSearchPage()) {
-          openTxnSubnav();
+        if (isModuleSubnavPage()) {
+          openCurrentModuleSubnav();
         }
       } else {
         expandSidebar();
@@ -238,7 +265,7 @@
         setDashboardActive();
       }
     } else {
-      initTxnPageNav();
+      initModulePageNav();
     }
   }
 
@@ -250,14 +277,14 @@
     if (isDesktop()) {
       sidebar.classList.remove('show');
       if (overlay) overlay.classList.remove('show');
-      if (isTxnSearchPage()) {
-        initTxnPageNav();
+      if (isModuleSubnavPage()) {
+        initModulePageNav();
       }
-    } else if (isTxnSearchPage()) {
+    } else if (isModuleSubnavPage()) {
       sidebar.classList.remove('sidebar-expanded');
       sidebar.classList.remove('show');
       if (overlay) overlay.classList.remove('show');
-      openTxnSubnav();
+      openCurrentModuleSubnav();
       updateToggleUi();
     }
   });
