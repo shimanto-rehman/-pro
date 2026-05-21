@@ -86,6 +86,30 @@
     }
   }
 
+  function closeMobileSidebar() {
+    if (!sidebar) return;
+    sidebar.classList.remove('show');
+    sidebar.classList.remove('sidebar-expanded');
+    if (overlay) overlay.classList.remove('show');
+    closeAllSubnavs();
+  }
+
+  function handleOutsideSidebarClick(event) {
+    if (!sidebar || sidebar.contains(event.target)) return;
+    if (hamburgerBtn && hamburgerBtn.contains(event.target)) return;
+
+    if (isDesktop()) {
+      if (sidebar.classList.contains('sidebar-expanded')) {
+        collapseSidebar();
+      }
+      return;
+    }
+
+    if (sidebar.classList.contains('show')) {
+      closeMobileSidebar();
+    }
+  }
+
   if (hamburgerBtn && sidebar && overlay) {
     hamburgerBtn.addEventListener('click', function () {
       sidebar.classList.toggle('show');
@@ -102,10 +126,7 @@
     });
 
     overlay.addEventListener('click', function () {
-      sidebar.classList.remove('show');
-      sidebar.classList.remove('sidebar-expanded');
-      overlay.classList.remove('show');
-      closeAllSubnavs();
+      closeMobileSidebar();
     });
   }
 
@@ -148,6 +169,8 @@
     if (!hasMenuActive) {
       setDashboardActive();
     }
+
+    document.addEventListener('click', handleOutsideSidebarClick);
   }
 
   updateToggleUi();
