@@ -1,0 +1,104 @@
+/* Processing Queue — shared across BEFTN, NPSB, MTB, Wallet */
+
+.pq-page .beftn-module-hero {
+  margin-top: 1rem;
+}
+
+.pq-top-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.pq-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.pq-summary-card .beftn-module-card-head {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.pq-mini-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.pq-mini-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pq-mini-actions .beftn-btn {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+}
+
+.pq-mini-search {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.pq-mini-search .beftn-input {
+  width: 9rem;
+  min-width: 120px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.8rem;
+}
+
+.pq-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  color: #6c757d;
+}
+
+.pq-pagination-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.pq-page-btn {
+  min-width: 1.85rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgba(61, 26, 100, 0.18);
+  border-radius: 6px;
+  background: #fff;
+  color: #495057;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pq-page-btn.is-active {
+  background: var(--rms-gradient);
+  border-color: transparent;
+  color: #fff;
+}
+
+.pq-queue-table thead {
+  background: linear-gradient(135deg, rgba(20, 123, 122, 0.12) 0%, rgba(61, 26, 100, 0.08) 100%);
+}
+
+@media (max-width: 992px) {
+  .pq-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>File Upload - RMS</title>
+    <title>BEFTN Processing Queue - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -13,8 +13,12 @@
     <link rel="stylesheet" href="assets/css/beftn.css" />
     <link rel="stylesheet" href="assets/css/action-modal.css" />
     <link rel="stylesheet" href="assets/css/manual-file.css" />
+    <link rel="stylesheet" href="assets/css/configuration.css" />
+    <link rel="stylesheet" href="assets/css/reports.css" />
+    <link rel="stylesheet" href="assets/css/processing-queue.css" />
+    <link rel="stylesheet" href="assets/css/action-modal.css" />
   </head>
-  <body class="dashboard-page" data-page="manual-file-upload">
+  <body class="dashboard-page" data-page="beftn-processing-queue">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -54,13 +58,13 @@
           </div>
 
           <!-- BEFTN -->
-          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-beftn-sub">
+          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-beftn-sub" aria-expanded="true">
             <i class="bi bi-bank nav-item-icon" aria-hidden="true"></i>
             <span>BEFTN</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle BEFTN sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav" id="nav-beftn-sub">
-            <a href="beftn-processing-queue.html" class="subnav-item">Processing Queue</a>
+          <div class="sidebar-subnav subnav-open" id="nav-beftn-sub">
+            <a href="beftn-processing-queue.html" class="subnav-item active">Processing Queue</a>
             <a href="beftn-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="beftn-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="beftn-cancellation.html" class="subnav-item">Cancellation</a>
@@ -110,12 +114,12 @@
           </div>
 
           <!-- Manual File -->
-          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-manual-file-sub" aria-expanded="true">
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-manual-file-sub">
             <i class="bi bi-file-earmark-arrow-up nav-item-icon" aria-hidden="true"></i>
             <span>Manual File</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Manual File sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav subnav-open" id="nav-manual-file-sub">
+          <div class="sidebar-subnav" id="nav-manual-file-sub">
             <a href="manual-file-upload.html" class="subnav-item">File Upload</a>
             <a href="manual-file-authorized.html" class="subnav-item">File Authorized</a>
             <a href="manual-file-failed-process.html" class="subnav-item">Failed Process</a>
@@ -356,85 +360,157 @@
           </div>
         </header>
 
-        <div class="beftn-module-page mf-page">
+        <div class="beftn-module-page pq-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">Manual File <i class="bi bi-chevron-right" aria-hidden="true"></i> File Upload</p>
-              <h1 class="beftn-module-title">Manual File — File Upload</h1>
-              <p class="beftn-module-desc">Select an exchange house, load a file to preview records, then upload for processing.</p>
+              <p class="beftn-module-breadcrumb">BEFTN <i class="bi bi-chevron-right" aria-hidden="true"></i> Processing Queue</p>
+              <h1 class="beftn-module-title">BEFTN — Processing Queue</h1>
+              <p class="beftn-module-desc">Monitor queued BEFTN transactions, exchange house summaries, and processing status.</p>
             </div>
           </header>
 
-          <section class="beftn-module-card">
-            <div class="mf-inline-row">
-              <div class="mf-inline-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadExHouse">EX House</label>
-                <select id="mfUploadExHouse" class="beftn-select">
-                    <option value="">— Select Ex_House —</option>
-                    <option>Western Union</option>
-                    <option>MoneyGram</option>
-                    <option>Ria Money Transfer</option>
-                    <option>Transfast</option>
-                </select>
+          <div class="pq-top-actions">
+            <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+          </div>
+
+          <div class="pq-summary-grid">
+            <section class="beftn-module-card pq-summary-card">
+              <div class="beftn-module-card-head">
+                <h2 class="beftn-module-card-title">Exchange house summary</h2>
               </div>
-            </div>
-            <div class="mf-file-row">
-              <input type="file" id="mfUploadFile" class="mf-file-input" accept=".csv,.xls,.xlsx,.txt">
-            </div>
-            <div class="beftn-module-actions beftn-module-actions--center">
-              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-folder2-open" aria-hidden="true"></i> Load</button>
-              <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-cloud-upload" aria-hidden="true"></i> Upload</button>
-            </div>
-          </section>
+
+              <div class="pq-mini-toolbar">
+                <div class="pq-mini-actions">
+                  <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-clipboard" aria-hidden="true"></i> Copy</button>
+                  <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-filetype-csv" aria-hidden="true"></i> CSV</button>
+                  <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-printer" aria-hidden="true"></i> Print</button>
+                </div>
+                <div class="pq-mini-search">
+                  <label for="pqbeftnSumSearch">Search</label>
+                  <input type="search" id="pqbeftnSumSearch" class="beftn-input" aria-label="Search">
+                </div>
+              </div>
+              <div class="beftn-table-wrap">
+                <table class="beftn-table">
+                  <thead>
+                    <tr>
+                      <th>Party ID</th>
+                      <th>EX House</th>
+                      <th>Count</th>
+                      <th>Txn Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>10001</td><td>WISE PAYMENTS LTD.</td><td>245</td><td>INC TXN</td></tr>
+                    <tr><td>10002</td><td>DIGITAL WALLET CORPORATION</td><td>128</td><td>PRI TXN</td></tr>
+                    <tr><td>10003</td><td>AL ANSARI EXCHANGE</td><td>89</td><td>INC TXN</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pq-pagination">
+                <span>Showing 1 to 3 of 12 entries</span>
+                <div class="pq-pagination-nav" aria-label="Pagination">
+                  <button type="button" class="pq-page-btn" disabled>Previous</button>
+                  <button type="button" class="pq-page-btn is-active">1</button>
+                  <button type="button" class="pq-page-btn">2</button>
+                  <button type="button" class="pq-page-btn">Next</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="beftn-module-card pq-summary-card">
+              <div class="beftn-module-card-head">
+                <h2 class="beftn-module-card-title">Recent queue items</h2>
+              </div>
+
+              <div class="pq-mini-toolbar">
+                <div class="pq-mini-actions">
+                  <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-clipboard" aria-hidden="true"></i> Copy</button>
+                  <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-filetype-csv" aria-hidden="true"></i> CSV</button>
+                  <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-printer" aria-hidden="true"></i> Print</button>
+                </div>
+                <div class="pq-mini-search">
+                  <label for="pqbeftnRecentSearch">Search</label>
+                  <input type="search" id="pqbeftnRecentSearch" class="beftn-input" aria-label="Search">
+                </div>
+              </div>
+              <div class="beftn-table-wrap">
+                <table class="beftn-table">
+                  <thead>
+                    <tr>
+                      <th>EX House</th>
+                      <th>Ref No</th>
+                      <th>Amount</th>
+                      <th>Request Time</th>
+                      <th>Txn Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>DIGITAL WALLET CORPORATION</td><td>MTB44582883884535</td><td>669.38</td><td>8/2/2023 1:32:22 PM</td><td>INC TXN</td></tr>
+                    <tr><td>WISE PAYMENTS LTD.</td><td>MTB44582883884536</td><td>1,250.00</td><td>8/2/2023 1:28:10 PM</td><td>PRI TXN</td></tr>
+                    <tr><td>AL ANSARI EXCHANGE</td><td>MTB44582883884537</td><td>420.15</td><td>8/2/2023 1:15:05 PM</td><td>INC TXN</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pq-pagination">
+                <span>Showing 1 to 3 of 48 entries</span>
+                <div class="pq-pagination-nav" aria-label="Pagination">
+                  <button type="button" class="pq-page-btn" disabled>Previous</button>
+                  <button type="button" class="pq-page-btn is-active">1</button>
+                  <button type="button" class="pq-page-btn">2</button>
+                  <button type="button" class="pq-page-btn">Next</button>
+                </div>
+              </div>
+            </section>
+          </div>
 
           <section class="beftn-module-card">
-            <div class="mf-summary-grid">
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadTotal">Total</label>
-                <input type="text" id="mfUploadTotal" class="beftn-input" readonly placeholder="—">
+            <div class="rpt-filter-grid rpt-filter-grid--two-col">
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="pqbeftnFrom">From Date</label>
+                <input type="date" id="pqbeftnFrom" class="beftn-input">
               </div>
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadCount">Count</label>
-                <input type="text" id="mfUploadCount" class="beftn-input" readonly placeholder="—">
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="pqbeftnTo">To Date</label>
+                <input type="date" id="pqbeftnTo" class="beftn-input">
               </div>
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadStatus">Status</label>
-                <input type="text" id="mfUploadStatus" class="beftn-input" readonly placeholder="—">
-              </div>
+            </div>
+            <div class="beftn-module-actions beftn-module-actions--center">
+              <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-search" aria-hidden="true"></i> Search</button>
+              <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-x-circle" aria-hidden="true"></i> Clear</button>
             </div>
           </section>
 
           <section class="beftn-module-card">
             <div class="beftn-module-card-head">
               <div>
-                <h2 class="beftn-module-card-title">Upload preview</h2>
-                <p class="beftn-module-card-sub">Records loaded from the selected file</p>
+                <h2 class="beftn-module-card-title">Processing queue</h2>
+                <p class="beftn-module-card-sub">Detailed BEFTN transaction queue</p>
               </div>
-              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
             </div>
             <div class="beftn-table-wrap">
-              <table class="beftn-table">
+              <table class="beftn-table pq-queue-table">
                 <thead>
                   <tr>
-                    <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                    <th>REFNo</th>
-                    <th>Remitter Name</th>
-                    <th>Remitter Address</th>
-                    <th>Remitter Nationality</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Address</th>
-                    <th>Beneficiary AC No</th>
-                    <th>Beneficiary Bank AC Type</th>
-                    <th>Beneficiary Bank Name</th>
-                    <th>Beneficiary Bank Branch</th>
-                    <th>Branch Routing Number</th>
+                    <th>Party ID</th>
+                    <th>Ref No</th>
+                    <th>EX House</th>
                     <th>Amount</th>
-                    <th>Payment Description</th>
-                    <th>Sending Country</th>
+                    <th>Create Time</th>
+                    <th>Processing Time</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th>Txn Type</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td colspan="15"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No records loaded. Choose a file and click Load to preview.</div></td></tr>
+                  <tr>
+                    <td colspan="9">
+                      <div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No queue records found. Adjust dates and search to view BEFTN processing items.</div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>

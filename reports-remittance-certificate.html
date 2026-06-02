@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>File Upload - RMS</title>
+    <title>Remittance Certificate - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -13,8 +13,11 @@
     <link rel="stylesheet" href="assets/css/beftn.css" />
     <link rel="stylesheet" href="assets/css/action-modal.css" />
     <link rel="stylesheet" href="assets/css/manual-file.css" />
+    <link rel="stylesheet" href="assets/css/configuration.css" />
+    <link rel="stylesheet" href="assets/css/reports.css" />
+    <link rel="stylesheet" href="assets/css/action-modal.css" />
   </head>
-  <body class="dashboard-page" data-page="manual-file-upload">
+  <body class="dashboard-page" data-page="reports-remittance-certificate">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -110,12 +113,12 @@
           </div>
 
           <!-- Manual File -->
-          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-manual-file-sub" aria-expanded="true">
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-manual-file-sub">
             <i class="bi bi-file-earmark-arrow-up nav-item-icon" aria-hidden="true"></i>
             <span>Manual File</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Manual File sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav subnav-open" id="nav-manual-file-sub">
+          <div class="sidebar-subnav" id="nav-manual-file-sub">
             <a href="manual-file-upload.html" class="subnav-item">File Upload</a>
             <a href="manual-file-authorized.html" class="subnav-item">File Authorized</a>
             <a href="manual-file-failed-process.html" class="subnav-item">Failed Process</a>
@@ -152,17 +155,17 @@
           </div>
 
           <!-- Reports & MIS -->
-          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-reports-mis-sub">
+          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-reports-mis-sub" aria-expanded="true">
             <i class="bi bi-bar-chart nav-item-icon" aria-hidden="true"></i>
             <span>Reports &amp; MIS</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Reports and MIS sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav" id="nav-reports-mis-sub">
+          <div class="sidebar-subnav subnav-open" id="nav-reports-mis-sub">
             <a href="reports-balance.html" class="subnav-item">Exchange House Balance</a>
             <a href="reports-principle.html" class="subnav-item">Principle Report</a>
             <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
             <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
-            <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>
+            <a href="reports-remittance-certificate.html" class="subnav-item active">Remittance Certificate</a>
           </div>
 
           <!-- Log & API Monitoring -->
@@ -356,87 +359,59 @@
           </div>
         </header>
 
-        <div class="beftn-module-page mf-page">
+        <div class="beftn-module-page rpt-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">Manual File <i class="bi bi-chevron-right" aria-hidden="true"></i> File Upload</p>
-              <h1 class="beftn-module-title">Manual File — File Upload</h1>
-              <p class="beftn-module-desc">Select an exchange house, load a file to preview records, then upload for processing.</p>
+              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Remittance Certificate</p>
+              <h1 class="beftn-module-title">Remittance Certificate</h1>
+              <p class="beftn-module-desc">Generate remittance certificates by payment type, report type, and date range.</p>
             </div>
           </header>
 
           <section class="beftn-module-card">
-            <div class="mf-inline-row">
-              <div class="mf-inline-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadExHouse">EX House</label>
-                <select id="mfUploadExHouse" class="beftn-select">
-                    <option value="">— Select Ex_House —</option>
-                    <option>Western Union</option>
-                    <option>MoneyGram</option>
-                    <option>Ria Money Transfer</option>
-                    <option>Transfast</option>
+            <div class="rpt-cert-grid">
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertPayType">Payment Type</label>
+                <select id="rptCertPayType" class="beftn-select">
+                  <option>Other Bank</option>
+                  <option>MTB Account</option>
+                  <option>Wallet</option>
+                </select>
+              </div>
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertReportType">Report Type</label>
+                <select id="rptCertReportType" class="beftn-select">
+                  <option>Certificate</option>
+                  <option>Statement</option>
+                </select>
+              </div>
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertFrom">From Date</label>
+                <input type="date" id="rptCertFrom" class="beftn-input">
+              </div>
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertTo">To Date</label>
+                <input type="date" id="rptCertTo" class="beftn-input">
+              </div>
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertAcct">Account / Mobile No</label>
+                <input type="text" id="rptCertAcct" class="beftn-input" placeholder="Account or mobile number">
+              </div>
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertRef">Certificate Ref No</label>
+                <input type="text" id="rptCertRef" class="beftn-input" placeholder="Certificate reference">
+              </div>
+              <div class="rpt-inline-field">
+                <label class="beftn-label-block" for="rptCertRemitType">Remittance Type</label>
+                <select id="rptCertRemitType" class="beftn-select">
+                  <option>Wage</option>
+                  <option>Principle</option>
+                  <option>Incentive</option>
                 </select>
               </div>
             </div>
-            <div class="mf-file-row">
-              <input type="file" id="mfUploadFile" class="mf-file-input" accept=".csv,.xls,.xlsx,.txt">
-            </div>
-            <div class="beftn-module-actions beftn-module-actions--center">
-              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-folder2-open" aria-hidden="true"></i> Load</button>
-              <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-cloud-upload" aria-hidden="true"></i> Upload</button>
-            </div>
-          </section>
-
-          <section class="beftn-module-card">
-            <div class="mf-summary-grid">
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadTotal">Total</label>
-                <input type="text" id="mfUploadTotal" class="beftn-input" readonly placeholder="—">
-              </div>
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadCount">Count</label>
-                <input type="text" id="mfUploadCount" class="beftn-input" readonly placeholder="—">
-              </div>
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadStatus">Status</label>
-                <input type="text" id="mfUploadStatus" class="beftn-input" readonly placeholder="—">
-              </div>
-            </div>
-          </section>
-
-          <section class="beftn-module-card">
-            <div class="beftn-module-card-head">
-              <div>
-                <h2 class="beftn-module-card-title">Upload preview</h2>
-                <p class="beftn-module-card-sub">Records loaded from the selected file</p>
-              </div>
-              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
-            </div>
-            <div class="beftn-table-wrap">
-              <table class="beftn-table">
-                <thead>
-                  <tr>
-                    <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                    <th>REFNo</th>
-                    <th>Remitter Name</th>
-                    <th>Remitter Address</th>
-                    <th>Remitter Nationality</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Address</th>
-                    <th>Beneficiary AC No</th>
-                    <th>Beneficiary Bank AC Type</th>
-                    <th>Beneficiary Bank Name</th>
-                    <th>Beneficiary Bank Branch</th>
-                    <th>Branch Routing Number</th>
-                    <th>Amount</th>
-                    <th>Payment Description</th>
-                    <th>Sending Country</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td colspan="15"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No records loaded. Choose a file and click Load to preview.</div></td></tr>
-                </tbody>
-              </table>
+            <div class="beftn-module-actions beftn-module-actions--end" style="justify-content: flex-end;">
+              <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Generate</button>
             </div>
           </section>
         </div>

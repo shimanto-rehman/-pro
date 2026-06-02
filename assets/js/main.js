@@ -14,7 +14,9 @@
     { prefix: 'npsb-', subnavId: 'nav-npsb-sub' },
     { prefix: 'mtb-transfer-', subnavId: 'nav-mtb-transfer-sub' },
     { prefix: 'wallet-', subnavId: 'nav-wallet-sub' },
-    { prefix: 'manual-file-', subnavId: 'nav-manual-file-sub' }
+    { prefix: 'manual-file-', subnavId: 'nav-manual-file-sub' },
+    { prefix: 'config-', subnavId: 'nav-configurations-sub' },
+    { prefix: 'reports-', subnavId: 'nav-reports-mis-sub' }
   ];
 
   function getEventElement(event) {

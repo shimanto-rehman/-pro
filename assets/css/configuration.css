@@ -1,0 +1,137 @@
+/* Configuration module — bulk entry + data table */
+
+.cfg-page .beftn-module-hero {
+  margin-top: 1rem;
+}
+
+.cfg-entry-card .beftn-label-block {
+  margin-bottom: 0.65rem;
+}
+
+.cfg-entry-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.cfg-bulk-input {
+  flex: 1 1 320px;
+  min-height: 120px;
+  margin: 0;
+}
+
+.cfg-entry-row .beftn-btn {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+
+.cfg-table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cfg-table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cfg-table-actions .beftn-btn {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.cfg-table-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.cfg-table-search .beftn-input {
+  width: 12rem;
+  min-width: 140px;
+  padding: 0.4rem 0.65rem;
+}
+
+.cfg-btn-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: #dc3545;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.cfg-btn-delete:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+.cfg-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.cfg-pagination-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cfg-page-btn {
+  min-width: 2rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(61, 26, 100, 0.18);
+  border-radius: 6px;
+  background: #fff;
+  color: #495057;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cfg-page-btn.is-active {
+  background: var(--rms-gradient);
+  border-color: transparent;
+  color: #fff;
+}
+
+.cfg-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .cfg-entry-row {
+    flex-direction: column;
+  }
+
+  .cfg-entry-row .beftn-btn {
+    width: 100%;
+  }
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>File Upload - RMS</title>
+    <title>Freelancer Keyword - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="assets/css/beftn.css" />
     <link rel="stylesheet" href="assets/css/action-modal.css" />
     <link rel="stylesheet" href="assets/css/manual-file.css" />
+    <link rel="stylesheet" href="assets/css/configuration.css" />
   </head>
-  <body class="dashboard-page" data-page="manual-file-upload">
+  <body class="dashboard-page" data-page="config-freelancer-keyword">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -110,12 +111,12 @@
           </div>
 
           <!-- Manual File -->
-          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-manual-file-sub" aria-expanded="true">
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-manual-file-sub">
             <i class="bi bi-file-earmark-arrow-up nav-item-icon" aria-hidden="true"></i>
             <span>Manual File</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Manual File sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav subnav-open" id="nav-manual-file-sub">
+          <div class="sidebar-subnav" id="nav-manual-file-sub">
             <a href="manual-file-upload.html" class="subnav-item">File Upload</a>
             <a href="manual-file-authorized.html" class="subnav-item">File Authorized</a>
             <a href="manual-file-failed-process.html" class="subnav-item">Failed Process</a>
@@ -124,12 +125,12 @@
           </div>
 
           <!-- Configurations -->
-          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-configurations-sub">
+          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-configurations-sub" aria-expanded="true">
             <i class="bi bi-gear nav-item-icon" aria-hidden="true"></i>
             <span>Configurations</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Configurations sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav" id="nav-configurations-sub">
+          <div class="sidebar-subnav subnav-open" id="nav-configurations-sub">
             <a href="config-freelancer-account.html" class="subnav-item">Freelancer Account</a>
             <a href="config-foreigner-account.html" class="subnav-item">Foreigner Account</a>
             <a href="config-company-account.html" class="subnav-item">Company Account</a>
@@ -356,87 +357,96 @@
           </div>
         </header>
 
-        <div class="beftn-module-page mf-page">
+        <div class="beftn-module-page cfg-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">Manual File <i class="bi bi-chevron-right" aria-hidden="true"></i> File Upload</p>
-              <h1 class="beftn-module-title">Manual File — File Upload</h1>
-              <p class="beftn-module-desc">Select an exchange house, load a file to preview records, then upload for processing.</p>
+              <p class="beftn-module-breadcrumb">Configurations <i class="bi bi-chevron-right" aria-hidden="true"></i> Freelancer Keyword</p>
+              <h1 class="beftn-module-title">Freelancer Keyword</h1>
+              <p class="beftn-module-desc">Configure keywords used to identify freelancer remittance transactions.</p>
             </div>
           </header>
 
-          <section class="beftn-module-card">
-            <div class="mf-inline-row">
-              <div class="mf-inline-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadExHouse">EX House</label>
-                <select id="mfUploadExHouse" class="beftn-select">
-                    <option value="">— Select Ex_House —</option>
-                    <option>Western Union</option>
-                    <option>MoneyGram</option>
-                    <option>Ria Money Transfer</option>
-                    <option>Transfast</option>
-                </select>
-              </div>
-            </div>
-            <div class="mf-file-row">
-              <input type="file" id="mfUploadFile" class="mf-file-input" accept=".csv,.xls,.xlsx,.txt">
-            </div>
-            <div class="beftn-module-actions beftn-module-actions--center">
-              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-folder2-open" aria-hidden="true"></i> Load</button>
-              <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-cloud-upload" aria-hidden="true"></i> Upload</button>
-            </div>
-          </section>
-
-          <section class="beftn-module-card">
-            <div class="mf-summary-grid">
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadTotal">Total</label>
-                <input type="text" id="mfUploadTotal" class="beftn-input" readonly placeholder="—">
-              </div>
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadCount">Count</label>
-                <input type="text" id="mfUploadCount" class="beftn-input" readonly placeholder="—">
-              </div>
-              <div class="mf-inline-field mf-summary-field">
-                <label class="beftn-label-block mf-inline-label" for="mfUploadStatus">Status</label>
-                <input type="text" id="mfUploadStatus" class="beftn-input" readonly placeholder="—">
-              </div>
+          <section class="beftn-module-card cfg-entry-card">
+            <label class="beftn-label-block" for="cfgFreelancerKwInput">Freelancer Keywords</label>
+            <div class="cfg-entry-row">
+              <textarea id="cfgFreelancerKwInput" class="beftn-textarea cfg-bulk-input" placeholder="Enter one or more keywords (one per line)"></textarea>
+              <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-save" aria-hidden="true"></i> Save</button>
             </div>
           </section>
 
           <section class="beftn-module-card">
             <div class="beftn-module-card-head">
               <div>
-                <h2 class="beftn-module-card-title">Upload preview</h2>
-                <p class="beftn-module-card-sub">Records loaded from the selected file</p>
+                <h2 class="beftn-module-card-title">Keyword list</h2>
+                <p class="beftn-module-card-sub">Existing keywords configured in the system</p>
               </div>
-              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+            </div>
+
+            <div class="cfg-table-toolbar">
+              <div class="cfg-table-actions">
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy</button>
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-filetype-csv" aria-hidden="true"></i> CSV</button>
+                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-printer" aria-hidden="true"></i> Print</button>
+              </div>
+              <div class="cfg-table-search">
+                <label for="cfgFreelancerKwSearch">Search</label>
+                <input type="search" id="cfgFreelancerKwSearch" class="beftn-input" placeholder="Filter records…" aria-label="Search table">
+              </div>
             </div>
             <div class="beftn-table-wrap">
               <table class="beftn-table">
                 <thead>
-                  <tr>
-                    <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                    <th>REFNo</th>
-                    <th>Remitter Name</th>
-                    <th>Remitter Address</th>
-                    <th>Remitter Nationality</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Address</th>
-                    <th>Beneficiary AC No</th>
-                    <th>Beneficiary Bank AC Type</th>
-                    <th>Beneficiary Bank Name</th>
-                    <th>Beneficiary Bank Branch</th>
-                    <th>Branch Routing Number</th>
-                    <th>Amount</th>
-                    <th>Payment Description</th>
-                    <th>Sending Country</th>
-                  </tr>
+                  <tr><th>ID</th><th>Freelancer Keywords</th><th>Added By</th><th>Date</th><th>Action</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td colspan="15"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No records loaded. Choose a file and click Load to preview.</div></td></tr>
+                    <tr>
+                      <td>67</td>
+                      <td>FREELANCING</td>
+                      <td>—</td>
+                      <td>8/21/2022 12:32:34 AM</td>
+                      <td><button type="button" class="cfg-btn-delete" aria-label="Delete keyword 67"><i class="bi bi-trash" aria-hidden="true"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>68</td>
+                      <td>FREELANCER</td>
+                      <td>—</td>
+                      <td>8/21/2022 12:33:01 AM</td>
+                      <td><button type="button" class="cfg-btn-delete" aria-label="Delete keyword 68"><i class="bi bi-trash" aria-hidden="true"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>69</td>
+                      <td>OUTSOURCING</td>
+                      <td>—</td>
+                      <td>8/22/2022 9:10:15 AM</td>
+                      <td><button type="button" class="cfg-btn-delete" aria-label="Delete keyword 69"><i class="bi bi-trash" aria-hidden="true"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>70</td>
+                      <td>FIVERR</td>
+                      <td>—</td>
+                      <td>8/22/2022 9:11:42 AM</td>
+                      <td><button type="button" class="cfg-btn-delete" aria-label="Delete keyword 70"><i class="bi bi-trash" aria-hidden="true"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>71</td>
+                      <td>UPWORK</td>
+                      <td>—</td>
+                      <td>8/23/2022 4:05:00 PM</td>
+                      <td><button type="button" class="cfg-btn-delete" aria-label="Delete keyword 71"><i class="bi bi-trash" aria-hidden="true"></i></button></td>
+                    </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div class="cfg-pagination">
+              <span class="cfg-pagination-info">Showing 1 to 10 of 72 entries</span>
+              <div class="cfg-pagination-nav" aria-label="Table pagination">
+                <button type="button" class="cfg-page-btn" disabled>Previous</button>
+                <button type="button" class="cfg-page-btn is-active">1</button>
+                <button type="button" class="cfg-page-btn">2</button>
+                <button type="button" class="cfg-page-btn">3</button>
+                <button type="button" class="cfg-page-btn">Next</button>
+              </div>
             </div>
           </section>
         </div>

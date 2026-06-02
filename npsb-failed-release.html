@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
     <link rel="stylesheet" href="assets/css/beftn.css" />
+    <link rel="stylesheet" href="assets/css/action-modal.css" />
   </head>
   <body class="dashboard-page" data-page="npsb-failed-release">
     <!-- Main Dashboard Layout -->
@@ -58,7 +59,7 @@
             <button class="nav-expand-btn" type="button" aria-label="Toggle BEFTN sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
           <div class="sidebar-subnav" id="nav-beftn-sub">
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="beftn-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="beftn-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="beftn-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="beftn-cancellation.html" class="subnav-item">Cancellation</a>
@@ -72,7 +73,7 @@
             <button class="nav-expand-btn" type="button" aria-label="Toggle NPSB sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
           <div class="sidebar-subnav subnav-open" id="nav-npsb-sub">
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="npsb-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="npsb-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="npsb-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="npsb-cancellation.html" class="subnav-item">Cancellation</a>
@@ -86,7 +87,7 @@
             <button class="nav-expand-btn" type="button" aria-label="Toggle MTB A/C Transfer sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
           <div class="sidebar-subnav" id="nav-mtb-transfer-sub">
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="mtb-transfer-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="mtb-transfer-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="mtb-transfer-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="mtb-transfer-cancellation.html" class="subnav-item">Cancellation</a>
@@ -100,7 +101,7 @@
             <button class="nav-expand-btn" type="button" aria-label="Toggle Wallet sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
           <div class="sidebar-subnav" id="nav-wallet-sub">
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="wallet-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="wallet-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="wallet-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="wallet-cancellation.html" class="subnav-item">Cancellation</a>
@@ -128,12 +129,12 @@
             <button class="nav-expand-btn" type="button" aria-label="Toggle Configurations sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
           <div class="sidebar-subnav" id="nav-configurations-sub">
-            <a href="#" class="subnav-item">Freelancer Account</a>
-            <a href="#" class="subnav-item">Foreigner Account</a>
-            <a href="#" class="subnav-item">Company Account</a>
-            <a href="#" class="subnav-item">Freelancer Keyword</a>
-            <a href="#" class="subnav-item">Foreigner Keyword</a>
-            <a href="#" class="subnav-item">Company Keyword</a>
+            <a href="config-freelancer-account.html" class="subnav-item">Freelancer Account</a>
+            <a href="config-foreigner-account.html" class="subnav-item">Foreigner Account</a>
+            <a href="config-company-account.html" class="subnav-item">Company Account</a>
+            <a href="config-freelancer-keyword.html" class="subnav-item">Freelancer Keyword</a>
+            <a href="config-foreigner-keyword.html" class="subnav-item">Foreigner Keyword</a>
+            <a href="config-company-keyword.html" class="subnav-item">Company Keyword</a>
           </div>
 
           <!-- Reconciliation Management -->
@@ -156,10 +157,11 @@
             <button class="nav-expand-btn" type="button" aria-label="Toggle Reports and MIS sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
           <div class="sidebar-subnav" id="nav-reports-mis-sub">
-            <a href="#" class="subnav-item">Principle Report</a>
-            <a href="#" class="subnav-item">Incentive Report</a>
-            <a href="#" class="subnav-item">Merge Statement</a>
-            <a href="#" class="subnav-item">Remittance Certificate</a>
+            <a href="reports-balance.html" class="subnav-item">Exchange House Balance</a>
+            <a href="reports-principle.html" class="subnav-item">Principle Report</a>
+            <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
+            <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
+            <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>
           </div>
 
           <!-- Log & API Monitoring -->
@@ -584,6 +586,7 @@
     <script src="assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/action-modal.js"></script>
     <script src="assets/js/beftn-page.js"></script>
   </body>
 </html>

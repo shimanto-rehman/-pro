@@ -1,0 +1,178 @@
+/* Reports & MIS module */
+
+.rpt-page .beftn-module-hero {
+  margin-top: 1rem;
+}
+
+.rpt-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.rpt-filter-grid--two-col {
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+}
+
+.rpt-inline-field {
+  display: flex;
+  align-items: stretch;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(61, 26, 100, 0.12);
+}
+
+.rpt-inline-field .beftn-label-block {
+  flex: 0 0 auto;
+  min-width: 8.5rem;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid var(--beftn-label-border);
+  display: flex;
+  align-items: center;
+}
+
+.rpt-inline-field .beftn-input,
+.rpt-inline-field .beftn-select {
+  flex: 1 1 auto;
+  border: none;
+  border-radius: 0;
+  min-width: 0;
+}
+
+.rpt-account-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
+.rpt-account-row .rpt-inline-field {
+  flex: 1 1 280px;
+}
+
+.rpt-account-row .beftn-btn-outline {
+  align-self: stretch;
+  white-space: nowrap;
+}
+
+.rpt-cert-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+/* Exchange House Balance */
+
+.bal-summary-card {
+  margin-bottom: 1.25rem;
+}
+
+.bal-summary-card .beftn-module-card-head {
+  border-bottom: none;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0;
+}
+
+.bal-summary-rows {
+  border: 1px solid rgba(61, 26, 100, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bal-summary-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(61, 26, 100, 0.08);
+}
+
+.bal-summary-row:last-child {
+  border-bottom: none;
+}
+
+.bal-summary-label {
+  flex: 0 0 220px;
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2c3e50;
+  background: var(--beftn-label-bg);
+  border-right: 1px solid var(--beftn-label-border);
+}
+
+.bal-summary-value {
+  flex: 1 1 auto;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rms-purple);
+  text-align: right;
+  background: #fff;
+}
+
+.bal-table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.bal-table-toolbar-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.bal-entries-select {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.bal-entries-select .beftn-select {
+  width: auto;
+  min-width: 4.5rem;
+  padding: 0.4rem 0.55rem;
+}
+
+.bal-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+  .rpt-filter-grid--two-col,
+  .rpt-cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rpt-inline-field {
+    flex-direction: column;
+  }
+
+  .rpt-inline-field .beftn-label-block {
+    border-right: none;
+    border-bottom: 1px solid var(--beftn-label-border);
+  }
+
+  .bal-summary-row {
+    flex-direction: column;
+  }
+
+  .bal-summary-label {
+    flex: none;
+    border-right: none;
+    border-bottom: 1px solid var(--beftn-label-border);
+  }
+
+  .bal-summary-value {
+    text-align: left;
+  }
+}

@@ -12,9 +12,18 @@ const manualFileSubnav = `
 
 const subnavUpdates = [
   {
+    id: 'nav-beftn-sub',
+    inner: `
+            <a href="beftn-processing-queue.html" class="subnav-item">Processing Queue</a>
+            <a href="beftn-failed-release.html" class="subnav-item">Failed Release</a>
+            <a href="beftn-callback-retry.html" class="subnav-item">Callback Retry</a>
+            <a href="beftn-cancellation.html" class="subnav-item">Cancellation</a>
+            <a href="beftn-status-change.html" class="subnav-item">Status Change</a>`,
+  },
+  {
     id: 'nav-npsb-sub',
     inner: `
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="npsb-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="npsb-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="npsb-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="npsb-cancellation.html" class="subnav-item">Cancellation</a>
@@ -23,7 +32,7 @@ const subnavUpdates = [
   {
     id: 'nav-mtb-transfer-sub',
     inner: `
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="mtb-transfer-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="mtb-transfer-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="mtb-transfer-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="mtb-transfer-cancellation.html" class="subnav-item">Cancellation</a>
@@ -32,7 +41,7 @@ const subnavUpdates = [
   {
     id: 'nav-wallet-sub',
     inner: `
-            <a href="#" class="subnav-item">Processing Queue</a>
+            <a href="wallet-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="wallet-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="wallet-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="wallet-cancellation.html" class="subnav-item">Cancellation</a>
@@ -41,6 +50,25 @@ const subnavUpdates = [
   {
     id: 'nav-manual-file-sub',
     inner: manualFileSubnav,
+  },
+  {
+    id: 'nav-configurations-sub',
+    inner: `
+            <a href="config-freelancer-account.html" class="subnav-item">Freelancer Account</a>
+            <a href="config-foreigner-account.html" class="subnav-item">Foreigner Account</a>
+            <a href="config-company-account.html" class="subnav-item">Company Account</a>
+            <a href="config-freelancer-keyword.html" class="subnav-item">Freelancer Keyword</a>
+            <a href="config-foreigner-keyword.html" class="subnav-item">Foreigner Keyword</a>
+            <a href="config-company-keyword.html" class="subnav-item">Company Keyword</a>`,
+  },
+  {
+    id: 'nav-reports-mis-sub',
+    inner: `
+            <a href="reports-balance.html" class="subnav-item">Exchange House Balance</a>
+            <a href="reports-principle.html" class="subnav-item">Principle Report</a>
+            <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
+            <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
+            <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>`,
   },
 ];
 
@@ -57,7 +85,7 @@ const files = fs.readdirSync(root).filter((f) => f.endsWith('.html') && f !== 'l
 for (const file of files) {
   const filePath = path.join(root, file);
   let html = fs.readFileSync(filePath, 'utf8');
-  if (!html.includes('nav-npsb-sub')) continue;
+  if (!html.includes('nav-beftn-sub')) continue;
 
   let updated = html;
   for (const { id, inner } of subnavUpdates) {
