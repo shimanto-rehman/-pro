@@ -9,8 +9,12 @@
 
   var txnNavItem = sidebar ? sidebar.querySelector('[data-subnav-id="nav-transaction-search-sub"]') : null;
   var txnSubNav = document.getElementById('nav-transaction-search-sub');
-  var beftnNavItem = sidebar ? sidebar.querySelector('[data-subnav-id="nav-beftn-sub"]') : null;
-  var beftnSubNav = document.getElementById('nav-beftn-sub');
+  var moduleNavMap = [
+    { prefix: 'beftn-', subnavId: 'nav-beftn-sub' },
+    { prefix: 'npsb-', subnavId: 'nav-npsb-sub' },
+    { prefix: 'mtb-transfer-', subnavId: 'nav-mtb-transfer-sub' },
+    { prefix: 'wallet-', subnavId: 'nav-wallet-sub' }
+  ];
 
   function getEventElement(event) {
     var target = event.target;
@@ -34,9 +38,18 @@
     return page.indexOf('transaction-search') === 0;
   }
 
-  function isBeftnPage() {
+  function getActiveModuleNav() {
     var page = document.body.getAttribute('data-page') || '';
-    return page.indexOf('beftn-') === 0;
+    for (var i = 0; i < moduleNavMap.length; i++) {
+      if (page.indexOf(moduleNavMap[i].prefix) === 0) {
+        return moduleNavMap[i];
+      }
+    }
+    return null;
+  }
+
+  function isRemittanceModulePage() {
+    return getActiveModuleNav() !== null;
   }
 
   function closeAllSubnavs() {
@@ -58,23 +71,26 @@
     txnSubNav.classList.add('subnav-open');
   }
 
-  function openBeftnSubnav() {
-    if (!beftnNavItem || !beftnSubNav) return;
-    beftnNavItem.classList.add('active');
-    beftnNavItem.classList.add('nav-open');
-    beftnNavItem.setAttribute('aria-expanded', 'true');
-    beftnSubNav.classList.add('subnav-open');
+  function openRemittanceModuleSubnav(moduleNav) {
+    if (!sidebar || !moduleNav) return;
+    var navItem = sidebar.querySelector('[data-subnav-id="' + moduleNav.subnavId + '"]');
+    var subNav = document.getElementById(moduleNav.subnavId);
+    if (!navItem || !subNav) return;
+    navItem.classList.add('active');
+    navItem.classList.add('nav-open');
+    navItem.setAttribute('aria-expanded', 'true');
+    subNav.classList.add('subnav-open');
   }
 
   function isModuleSubnavPage() {
-    return isTxnSearchPage() || isBeftnPage();
+    return isTxnSearchPage() || isRemittanceModulePage();
   }
 
   function openCurrentModuleSubnav() {
     if (isTxnSearchPage()) {
       openTxnSubnav();
-    } else if (isBeftnPage()) {
-      openBeftnSubnav();
+    } else {
+      openRemittanceModuleSubnav(getActiveModuleNav());
     }
   }
 
