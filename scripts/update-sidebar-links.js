@@ -3,6 +3,13 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 
+const manualFileSubnav = `
+            <a href="manual-file-upload.html" class="subnav-item">File Upload</a>
+            <a href="manual-file-authorized.html" class="subnav-item">File Authorized</a>
+            <a href="manual-file-failed-process.html" class="subnav-item">Failed Process</a>
+            <a href="manual-file-bkash-recon.html" class="subnav-item">Bkash Direct Reconciliation Process</a>
+            <a href="manual-file-nagad-recon.html" class="subnav-item">Nagad Direct Reconciliation Process</a>`;
+
 const subnavUpdates = [
   {
     id: 'nav-npsb-sub',
@@ -30,6 +37,10 @@ const subnavUpdates = [
             <a href="wallet-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="wallet-cancellation.html" class="subnav-item">Cancellation</a>
             <a href="wallet-status-change.html" class="subnav-item">Status Change</a>`,
+  },
+  {
+    id: 'nav-manual-file-sub',
+    inner: manualFileSubnav,
   },
 ];
 

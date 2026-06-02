@@ -13,7 +13,8 @@
     { prefix: 'beftn-', subnavId: 'nav-beftn-sub' },
     { prefix: 'npsb-', subnavId: 'nav-npsb-sub' },
     { prefix: 'mtb-transfer-', subnavId: 'nav-mtb-transfer-sub' },
-    { prefix: 'wallet-', subnavId: 'nav-wallet-sub' }
+    { prefix: 'wallet-', subnavId: 'nav-wallet-sub' },
+    { prefix: 'manual-file-', subnavId: 'nav-manual-file-sub' }
   ];
 
   function getEventElement(event) {

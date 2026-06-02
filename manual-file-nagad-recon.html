@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BEFTN Failed Release - RMS</title>
+    <title>Nagad Direct Reconciliation - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
     <link rel="stylesheet" href="assets/css/beftn.css" />
+    <link rel="stylesheet" href="assets/css/manual-file.css" />
   </head>
-  <body class="dashboard-page" data-page="beftn-failed-release">
+  <body class="dashboard-page" data-page="manual-file-nagad-recon">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -52,14 +53,14 @@
           </div>
 
           <!-- BEFTN -->
-          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-beftn-sub" aria-expanded="true">
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-beftn-sub">
             <i class="bi bi-bank nav-item-icon" aria-hidden="true"></i>
             <span>BEFTN</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle BEFTN sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav subnav-open" id="nav-beftn-sub">
+          <div class="sidebar-subnav" id="nav-beftn-sub">
             <a href="#" class="subnav-item">Processing Queue</a>
-            <a href="beftn-failed-release.html" class="subnav-item active">Failed Release</a>
+            <a href="beftn-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="beftn-callback-retry.html" class="subnav-item">Callback Retry</a>
             <a href="beftn-cancellation.html" class="subnav-item">Cancellation</a>
             <a href="beftn-status-change.html" class="subnav-item">Status Change</a>
@@ -108,17 +109,17 @@
           </div>
 
           <!-- Manual File -->
-          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-manual-file-sub">
+          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-manual-file-sub" aria-expanded="true">
             <i class="bi bi-file-earmark-arrow-up nav-item-icon" aria-hidden="true"></i>
             <span>Manual File</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Manual File sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav" id="nav-manual-file-sub">
+          <div class="sidebar-subnav subnav-open" id="nav-manual-file-sub">
             <a href="manual-file-upload.html" class="subnav-item">File Upload</a>
             <a href="manual-file-authorized.html" class="subnav-item">File Authorized</a>
             <a href="manual-file-failed-process.html" class="subnav-item">Failed Process</a>
             <a href="manual-file-bkash-recon.html" class="subnav-item">Bkash Direct Reconciliation Process</a>
-            <a href="manual-file-nagad-recon.html" class="subnav-item">Nagad Direct Reconciliation Process</a>
+            <a href="manual-file-nagad-recon.html" class="subnav-item active">Nagad Direct Reconciliation Process</a>
           </div>
 
           <!-- Configurations -->
@@ -353,228 +354,106 @@
           </div>
         </header>
 
-        
-        <div class="beftn-module-page">
+        <div class="beftn-module-page mf-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">BEFTN <i class="bi bi-chevron-right" aria-hidden="true"></i> Failed Release</p>
-              <h1 class="beftn-module-title">BEFTN — Failed Release</h1>
-              <p class="beftn-module-desc">Review and release failed BEFTN transactions for principle and incentive remittance.</p>
+              <p class="beftn-module-breadcrumb">Manual File <i class="bi bi-chevron-right" aria-hidden="true"></i> Nagad Direct Reconciliation</p>
+              <h1 class="beftn-module-title">Nagad Direct Reconciliation Process</h1>
+              <p class="beftn-module-desc">Upload and process Nagad direct reconciliation CSV files by MTO, wallet, and date range.</p>
             </div>
           </header>
 
-          <div class="beftn-type-nav-wrap">
-            <p class="beftn-type-nav-label">Select transaction type</p>
-            <nav class="beftn-type-nav" aria-label="Transaction type">
-              <button type="button" class="beftn-type-nav-btn is-active" data-beftn-type="principle" aria-selected="true">Principle</button>
-              <button type="button" class="beftn-type-nav-btn" data-beftn-type="incentive" aria-selected="false">Incentive</button>
-            </nav>
-          </div>
+          <section class="beftn-module-card">
+            <div class="mf-inline-row">
+              <div class="mf-inline-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadMto">MTO Name</label>
+                <select id="mfNagadMto" class="beftn-select">
+                  <option value="">— Select ALL —</option>
+                  <option>Nagad MTO 1</option>
+                  <option>Nagad MTO 2</option>
+                </select>
+              </div>
+              <div class="mf-inline-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadNagadMto">NAGAD MTO Name</label>
+                <select id="mfNagadNagadMto" class="beftn-select">
+                  <option value="">— Select MTO Name —</option>
+                  <option>Nagad Partner A</option>
+                  <option>Nagad Partner B</option>
+                </select>
+              </div>
+              <div class="mf-inline-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadWallet">Wallet</label>
+                <select id="mfNagadWallet" class="beftn-select">
+                  <option value="">— Select Service Type —</option>
+                  <option>Nagad</option>
+                  <option>Cash In</option>
+                  <option>Cash Out</option>
+                </select>
+              </div>
+            </div>
+            <div class="mf-inline-row" style="margin-top: 1rem;">
+              <div class="mf-inline-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadFromDate">From Date</label>
+                <input type="date" id="mfNagadFromDate" class="beftn-input">
+              </div>
+              <div class="mf-inline-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadToDate">To Date</label>
+                <input type="date" id="mfNagadToDate" class="beftn-input">
+              </div>
+            </div>
+            <div class="mf-file-row">
+              <input type="file" id="mfNagadFile" class="mf-file-input" accept=".csv,.xls,.xlsx,.txt">
+            </div>
+            <div class="mf-actions-stack">
+              <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-cloud-upload" aria-hidden="true"></i> Upload and Process CSV</button>
+              <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Process Data</button>
+            </div>
+          </section>
 
-          
-          <div class="beftn-type-panel" data-beftn-panel="principle">
-            <section class="beftn-module-card">
-              <div class="beftn-filter-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriFromDate">From Date</label>
-                  <input type="date" id="failedreleasepriFromDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriToDate">To Date</label>
-                  <input type="date" id="failedreleasepriToDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriType">Principal Status</label>
-                  <select id="failedreleasepriType" class="beftn-select">
-                    <option value="">— Select —</option>
-                    <option>All Types</option><option>Standard</option><option>Express</option>
-                  </select>
-                </div>
+          <section class="beftn-module-card">
+            <div class="mf-summary-grid">
+              <div class="mf-inline-field mf-summary-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadTotalCount">Total Count</label>
+                <input type="text" id="mfNagadTotalCount" class="beftn-input" readonly placeholder="—">
               </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
+              <div class="mf-inline-field mf-summary-field">
+                <label class="beftn-label-block mf-inline-label" for="mfNagadMismatch">Miss Match Count</label>
+                <input type="text" id="mfNagadMismatch" class="beftn-input" readonly placeholder="—">
               </div>
-            </section>
+            </div>
+          </section>
 
-            <section class="beftn-module-card">
-              <div class="beftn-field beftn-field--full">
-                <label class="beftn-label-block" for="failedreleasepriBulkPin">PIN / Reference</label>
-                <textarea id="failedreleasepriBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
+          <section class="beftn-module-card">
+            <div class="beftn-module-card-head">
+              <div>
+                <h2 class="beftn-module-card-title">Reconciliation results</h2>
+                <p class="beftn-module-card-sub">Nagad direct reconciliation output</p>
               </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-action-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriPaymentStatus">Payment Status</label>
-                  <select id="failedreleasepriPaymentStatus" class="beftn-select">
-                    <option selected>Failed Release</option>
-                    <option>Pending</option>
-                    <option>Released</option>
-                    <option>Failed</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriMarking">Marking Transaction</label>
-                  <select id="failedreleasepriMarking" class="beftn-select">
-                    <option value="">— Select marking —</option>
-                    <option>Mark for Release</option>
-                    <option>Hold</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriRemarks">Remarks</label>
-                  <input type="text" id="failedreleasepriRemarks" class="beftn-input" placeholder="Enter remarks">
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--between">
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-module-card-head">
-                <div>
-                  <h2 class="beftn-module-card-title">Results — Principle</h2>
-                  <p class="beftn-module-card-sub">Failed Release output for principle transactions</p>
-                </div>
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
-              </div>
-              <div class="beftn-table-wrap">
-                <table class="beftn-table">
-                  <thead>
-                    <tr>
-                      <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                      <th>Exchange House</th>
-                      <th>PIN No</th>
-                      <th>Sender Name</th>
-                      <th>Sender Address</th>
-                      <th>Sender Country</th>
-                      <th>Beneficiary Name</th>
-                      <th>Beneficiary Account</th>
-                      <th>Principal Amount</th>
-                      <th>Source of Fund</th>
-                      <th>Purpose of Fund</th>
-                      <th>Transaction Date</th>
-                      <th>Payment Status</th>
-                      <th>Sender Nationality</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td colspan="14"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No principle records found. Run a search to view results.</div></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </div>
-          
-          <div class="beftn-type-panel" data-beftn-panel="incentive" hidden>
-            <section class="beftn-module-card">
-              <div class="beftn-filter-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincFromDate">From Date</label>
-                  <input type="date" id="failedreleaseincFromDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincToDate">To Date</label>
-                  <input type="date" id="failedreleaseincToDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincType">Incentive Status</label>
-                  <select id="failedreleaseincType" class="beftn-select">
-                    <option value="">— Select —</option>
-                    <option>All Types</option><option>Regular Incentive</option><option>Special Incentive</option>
-                  </select>
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-field beftn-field--full">
-                <label class="beftn-label-block" for="failedreleaseincBulkPin">PIN / Reference</label>
-                <textarea id="failedreleaseincBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-action-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincPaymentStatus">Payment Status</label>
-                  <select id="failedreleaseincPaymentStatus" class="beftn-select">
-                    <option selected>Failed Release</option>
-                    <option>Pending</option>
-                    <option>Released</option>
-                    <option>Failed</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincMarking">Marking Transaction</label>
-                  <select id="failedreleaseincMarking" class="beftn-select">
-                    <option value="">— Select marking —</option>
-                    <option>Mark for Release</option>
-                    <option>Hold</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincRemarks">Remarks</label>
-                  <input type="text" id="failedreleaseincRemarks" class="beftn-input" placeholder="Enter remarks">
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--between">
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-module-card-head">
-                <div>
-                  <h2 class="beftn-module-card-title">Results — Incentive</h2>
-                  <p class="beftn-module-card-sub">Failed Release output for incentive transactions</p>
-                </div>
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
-              </div>
-              <div class="beftn-table-wrap">
-                <table class="beftn-table">
-                  <thead>
-                    <tr>
-                      <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                      <th>Exchange House</th>
-                      <th>PIN No</th>
-                      <th>Sender Name</th>
-                      <th>Sender Address</th>
-                      <th>Sender Country</th>
-                      <th>Beneficiary Name</th>
-                      <th>Beneficiary Account</th>
-                      <th>Incentive Amount</th>
-                      <th>Source of Fund</th>
-                      <th>Purpose of Fund</th>
-                      <th>Transaction Date</th>
-                      <th>Payment Status</th>
-                      <th>Sender Nationality</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td colspan="14"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No incentive records found. Run a search to view results.</div></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </div>
+              <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+            </div>
+            <div class="beftn-table-wrap">
+              <table class="beftn-table">
+                <thead>
+                  <tr>
+                    <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
+                    <th>Reference No</th>
+                    <th>MTO Name</th>
+                    <th>NAGAD MTO</th>
+                    <th>Wallet</th>
+                    <th>Beneficiary Name</th>
+                    <th>Beneficiary Mobile</th>
+                    <th>Amount</th>
+                    <th>Transaction Date</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="11"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No reconciliation data. Upload a CSV or process data to view results.</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
         </div>
 
       </main>
@@ -584,6 +463,5 @@
     <script src="assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/beftn-page.js"></script>
   </body>
 </html>
