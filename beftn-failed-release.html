@@ -361,7 +361,6 @@
             <div>
               <p class="beftn-module-breadcrumb">BEFTN <i class="bi bi-chevron-right" aria-hidden="true"></i> Failed Release</p>
               <h1 class="beftn-module-title">BEFTN — Failed Release</h1>
-              <p class="beftn-module-desc">Review and release failed BEFTN transactions for principle and incentive remittance.</p>
             </div>
           </header>
 
@@ -392,24 +391,6 @@
                     <option>All Types</option><option>Standard</option><option>Express</option>
                   </select>
                 </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-field beftn-field--full">
-                <label class="beftn-label-block" for="failedreleasepriBulkPin">PIN / Reference</label>
-                <textarea id="failedreleasepriBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-action-grid">
                 <div class="beftn-field">
                   <label class="beftn-label-block" for="failedreleasepriPaymentStatus">Payment Status</label>
                   <select id="failedreleasepriPaymentStatus" class="beftn-select">
@@ -419,7 +400,36 @@
                     <option>Failed</option>
                   </select>
                 </div>
-                
+              </div>
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-module-card-head">
+                <div>
+                  <h2 class="beftn-module-card-title">Bulk PIN Search</h2>
+                </div>
+                <button type="button" class="beftn-toggle-btn" data-target="priBulkBody" aria-expanded="true" title="Minimize">
+                  <i class="bi bi-chevron-up" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="beftn-card-body" id="priBulkBody">
+                <div class="beftn-card-body-inner">
+                  <div class="beftn-field beftn-field--full">
+                    <label class="beftn-label-block" for="failedreleasepriBulkPin">PIN / Reference</label>
+                    <textarea id="failedreleasepriBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
+                  </div>
+                  <div class="beftn-module-actions beftn-module-actions--center">
+                    <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-action-grid">
                 <div class="beftn-field">
                   <label class="beftn-label-block" for="failedreleasepriMarking">Marking Transaction</label>
                   <select id="failedreleasepriMarking" class="beftn-select">
@@ -428,7 +438,7 @@
                     <option>Hold</option>
                   </select>
                 </div>
-                
+
                 <div class="beftn-field">
                   <label class="beftn-label-block" for="failedreleasepriRemarks">Remarks</label>
                   <input type="text" id="failedreleasepriRemarks" class="beftn-input" placeholder="Enter remarks">
@@ -494,24 +504,6 @@
                     <option>All Types</option><option>Regular Incentive</option><option>Special Incentive</option>
                   </select>
                 </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-field beftn-field--full">
-                <label class="beftn-label-block" for="failedreleaseincBulkPin">PIN / Reference</label>
-                <textarea id="failedreleaseincBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-action-grid">
                 <div class="beftn-field">
                   <label class="beftn-label-block" for="failedreleaseincPaymentStatus">Payment Status</label>
                   <select id="failedreleaseincPaymentStatus" class="beftn-select">
@@ -521,7 +513,36 @@
                     <option>Failed</option>
                   </select>
                 </div>
-                
+              </div>
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-module-card-head">
+                <div>
+                  <h2 class="beftn-module-card-title">Bulk PIN Search</h2>
+                </div>
+                <button type="button" class="beftn-toggle-btn" data-target="incBulkBody" aria-expanded="true" title="Minimize">
+                  <i class="bi bi-chevron-up" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="beftn-card-body" id="incBulkBody">
+                <div class="beftn-card-body-inner">
+                  <div class="beftn-field beftn-field--full">
+                    <label class="beftn-label-block" for="failedreleaseincBulkPin">PIN / Reference</label>
+                    <textarea id="failedreleaseincBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
+                  </div>
+                  <div class="beftn-module-actions beftn-module-actions--center">
+                    <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="beftn-module-card">
+              <div class="beftn-action-grid">
                 <div class="beftn-field">
                   <label class="beftn-label-block" for="failedreleaseincMarking">Marking Transaction</label>
                   <select id="failedreleaseincMarking" class="beftn-select">
@@ -530,7 +551,7 @@
                     <option>Hold</option>
                   </select>
                 </div>
-                
+
                 <div class="beftn-field">
                   <label class="beftn-label-block" for="failedreleaseincRemarks">Remarks</label>
                   <input type="text" id="failedreleaseincRemarks" class="beftn-input" placeholder="Enter remarks">
