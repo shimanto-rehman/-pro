@@ -9,10 +9,13 @@
     /release|process|retry|cancel|upload|save|generate|delete|update status|submit|authorize|confirm|refresh/i;
 
   var pendingCallback = null;
+  var pendingBtn = null;
   var modalEl = null;
   var bsModal = null;
   var titleEl = null;
-  var bodyEl = null;
+  var messageEl = null;
+  var remarksWrap = null;
+  var remarksInput = null;
   var confirmBtn = null;
   var iconEl = null;
 
@@ -27,7 +30,13 @@
       '        <h5 class="modal-title" id="rmsActionModalTitle"><i class="bi bi-question-circle" aria-hidden="true"></i><span>Confirm action</span></h5>' +
       '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
       '      </div>' +
-      '      <div class="modal-body" id="rmsActionModalBody">Are you sure you want to continue?</div>' +
+      '      <div class="modal-body" id="rmsActionModalBody">' +
+      '        <p class="rms-action-modal-message" id="rmsActionModalMessage">Are you sure you want to continue?</p>' +
+      '        <div class="rms-action-modal-remarks" id="rmsActionModalRemarks" hidden>' +
+      '          <label class="rms-action-modal-remarks-label" for="rmsActionModalRemarksInput">Remarks</label>' +
+      '          <input type="text" id="rmsActionModalRemarksInput" class="rms-action-modal-remarks-input" placeholder="Enter remarks">' +
+      '        </div>' +
+      '      </div>' +
       '      <div class="modal-footer">' +
       '        <button type="button" class="btn-rms-cancel" data-bs-dismiss="modal">Cancel</button>' +
       '        <button type="button" class="btn-rms-confirm" id="rmsActionModalConfirm">Confirm</button>' +
@@ -39,7 +48,9 @@
     document.body.insertAdjacentHTML('beforeend', html);
     modalEl = document.getElementById('rmsActionModal');
     titleEl = modalEl.querySelector('.modal-title span');
-    bodyEl = document.getElementById('rmsActionModalBody');
+    messageEl = document.getElementById('rmsActionModalMessage');
+    remarksWrap = document.getElementById('rmsActionModalRemarks');
+    remarksInput = document.getElementById('rmsActionModalRemarksInput');
     confirmBtn = document.getElementById('rmsActionModalConfirm');
     iconEl = modalEl.querySelector('.modal-title i');
 
@@ -48,14 +59,25 @@
     }
 
     confirmBtn.addEventListener('click', function () {
+      if (pendingBtn && remarksWrap && !remarksWrap.hidden && remarksInput) {
+        pendingBtn.dataset.actionRemarks = remarksInput.value.trim();
+      }
       if (bsModal) {
         bsModal.hide();
       }
       if (typeof pendingCallback === 'function') {
         var fn = pendingCallback;
         pendingCallback = null;
+        pendingBtn = null;
         fn();
       }
+    });
+
+    modalEl.addEventListener('hidden.bs.modal', function () {
+      pendingCallback = null;
+      pendingBtn = null;
+      if (remarksWrap) remarksWrap.hidden = true;
+      if (remarksInput) remarksInput.value = '';
     });
   }
 
@@ -141,20 +163,44 @@
 
     var label = getButtonLabel(btn) || 'this action';
     var destructive = isDestructive(label) || btn.classList.contains('cfg-btn-delete');
+    var askRemarks = btn.hasAttribute('data-ask-remarks');
 
     modalEl.classList.toggle('rms-action-modal--danger', destructive);
     iconEl.className = destructive
       ? 'bi bi-exclamation-triangle'
       : 'bi bi-check-circle';
-    titleEl.textContent = destructive ? 'Confirm ' + label : 'Confirm action';
-    bodyEl.textContent =
+
+    if (askRemarks && /^release$/i.test(label)) {
+      titleEl.textContent = 'Release Confirmation';
+    } else {
+      titleEl.textContent = destructive ? 'Confirm ' + label : 'Confirm action';
+    }
+
+    messageEl.textContent =
       'Are you sure you want to "' +
       label +
       '"? This action may update transaction or configuration data.';
     confirmBtn.textContent = destructive ? label : 'Confirm';
 
+    if (remarksWrap && remarksInput) {
+      remarksWrap.hidden = !askRemarks;
+      remarksInput.value = '';
+    }
+
+    pendingBtn = btn;
     pendingCallback = onConfirm;
     bsModal.show();
+
+    if (askRemarks && remarksInput) {
+      modalEl.addEventListener(
+        'shown.bs.modal',
+        function focusRemarks() {
+          remarksInput.focus();
+          modalEl.removeEventListener('shown.bs.modal', focusRemarks);
+        },
+        { once: true }
+      );
+    }
   }
 
   document.addEventListener(
@@ -165,6 +211,9 @@
 
       if (btn.dataset.rmsConfirmed === '1') {
         delete btn.dataset.rmsConfirmed;
+        if (!btn.hasAttribute('data-async-action')) {
+          btn.dataset.rmsActionToast = '1';
+        }
         return;
       }
 

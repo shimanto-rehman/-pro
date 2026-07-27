@@ -4,6 +4,8 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 
 const cssLink = '    <link rel="stylesheet" href="assets/css/action-modal.css" />';
+const toastCssLink = '    <link rel="stylesheet" href="assets/css/toast.css" />';
+const toastJsScript = '    <script src="assets/js/toast.js"></script>';
 const jsScript = '    <script src="assets/js/action-modal.js"></script>';
 
 const files = fs
@@ -32,6 +34,29 @@ for (const file of files) {
         '<link rel="stylesheet" href="assets/css/dashboard.css" />\n' + cssLink
       );
     }
+    changed = true;
+  }
+
+  if (!html.includes('toast.css')) {
+    if (html.includes('action-modal.css')) {
+      html = html.replace(
+        /<link rel="stylesheet" href="assets\/css\/action-modal\.css" \/>/,
+        toastCssLink + '\n' + cssLink
+      );
+    } else if (html.includes('assets/css/dashboard.css')) {
+      html = html.replace(
+        /<link rel="stylesheet" href="assets\/css\/dashboard\.css" \/>/,
+        '<link rel="stylesheet" href="assets/css/dashboard.css" />\n' + toastCssLink + '\n' + cssLink
+      );
+    }
+    changed = true;
+  }
+
+  if (!html.includes('toast.js')) {
+    html = html.replace(
+      /<script src="assets\/js\/main\.js"><\/script>/,
+      '<script src="assets/js/main.js"></script>\n' + toastJsScript
+    );
     changed = true;
   }
 

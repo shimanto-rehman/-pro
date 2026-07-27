@@ -311,6 +311,29 @@
   updateToggleUi();
 })();
 
+/* Header: RMS software branding in top-left */
+(function () {
+  var headerTop = document.querySelector('.dashboard-header .header-top');
+  if (!headerTop || headerTop.querySelector('.header-brand')) return;
+
+  var headerRight = headerTop.querySelector('.header-right');
+  var brand = document.createElement('div');
+  brand.className = 'header-brand';
+  brand.setAttribute('aria-label', 'Remittance Management System');
+  brand.innerHTML =
+    '<img src="assets/images/remitance.png" alt="RMS logo" class="header-brand-logo">' +
+    '<div class="header-brand-copy">' +
+    '  <span class="header-brand-name">Remittance Management System</span>' +
+    '  <span class="header-brand-sub">RMS</span>' +
+    '</div>';
+
+  if (headerRight) {
+    headerTop.insertBefore(brand, headerRight);
+  } else {
+    headerTop.appendChild(brand);
+  }
+})();
+
 /* Header: mark all notifications read (demo) */
 (function () {
   document.querySelectorAll('.btn-notification-mark-read').forEach(function (btn) {

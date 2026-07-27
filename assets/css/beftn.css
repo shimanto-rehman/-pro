@@ -122,6 +122,13 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
+.beftn-module-card-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .beftn-module-card-title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -140,6 +147,10 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   align-items: end;
+}
+
+.beftn-filter-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .beftn-field {
@@ -519,6 +530,7 @@
   }
 
   .beftn-filter-grid,
+  .beftn-filter-grid--two,
   .beftn-action-grid {
     grid-template-columns: 1fr;
   }

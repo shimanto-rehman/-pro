@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
     <link rel="stylesheet" href="assets/css/beftn.css" />
+        <link rel="stylesheet" href="assets/css/toast.css" />
     <link rel="stylesheet" href="assets/css/action-modal.css" />
   </head>
   <body class="dashboard-page" data-page="beftn-failed-release">
@@ -162,6 +163,8 @@
             <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
             <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
             <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>
+            <a href="reports-pending-transactions.html" class="subnav-item">Pending Transactions</a>
+            <a href="reports-pending-for-funds.html" class="subnav-item">Pending for Funds</a>
           </div>
 
           <!-- Log & API Monitoring -->
@@ -360,7 +363,6 @@
           <header class="beftn-module-hero">
             <div>
               <p class="beftn-module-breadcrumb">BEFTN <i class="bi bi-chevron-right" aria-hidden="true"></i> Failed Release</p>
-              <h1 class="beftn-module-title">BEFTN — Failed Release</h1>
             </div>
           </header>
 
@@ -406,16 +408,16 @@
               </div>
             </section>
 
-            <section class="beftn-module-card">
+            <section class="beftn-module-card is-collapsed">
               <div class="beftn-module-card-head">
                 <div>
                   <h2 class="beftn-module-card-title">Bulk PIN Search</h2>
                 </div>
-                <button type="button" class="beftn-toggle-btn" data-target="priBulkBody" aria-expanded="true" title="Minimize">
+                <button type="button" class="beftn-toggle-btn" data-target="priBulkBody" aria-expanded="false" title="Expand">
                   <i class="bi bi-chevron-up" aria-hidden="true"></i>
                 </button>
               </div>
-              <div class="beftn-card-body" id="priBulkBody">
+              <div class="beftn-card-body is-collapsed" id="priBulkBody">
                 <div class="beftn-card-body-inner">
                   <div class="beftn-field beftn-field--full">
                     <label class="beftn-label-block" for="failedreleasepriBulkPin">PIN / Reference</label>
@@ -429,34 +431,15 @@
             </section>
 
             <section class="beftn-module-card">
-              <div class="beftn-action-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriMarking">Marking Transaction</label>
-                  <select id="failedreleasepriMarking" class="beftn-select">
-                    <option value="">— Select marking —</option>
-                    <option>Mark for Release</option>
-                    <option>Hold</option>
-                  </select>
-                </div>
-
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleasepriRemarks">Remarks</label>
-                  <input type="text" id="failedreleasepriRemarks" class="beftn-input" placeholder="Enter remarks">
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--between">
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
               <div class="beftn-module-card-head">
                 <div>
                   <h2 class="beftn-module-card-title">Results — Principle</h2>
                   <p class="beftn-module-card-sub">Failed Release output for principle transactions</p>
                 </div>
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+                <div class="beftn-module-card-tools">
+                  <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+                  <button type="button" class="beftn-btn beftn-btn-accent" data-ask-remarks><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
+                </div>
               </div>
               <div class="beftn-table-wrap">
                 <table class="beftn-table">
@@ -519,16 +502,16 @@
               </div>
             </section>
 
-            <section class="beftn-module-card">
+            <section class="beftn-module-card is-collapsed">
               <div class="beftn-module-card-head">
                 <div>
                   <h2 class="beftn-module-card-title">Bulk PIN Search</h2>
                 </div>
-                <button type="button" class="beftn-toggle-btn" data-target="incBulkBody" aria-expanded="true" title="Minimize">
+                <button type="button" class="beftn-toggle-btn" data-target="incBulkBody" aria-expanded="false" title="Expand">
                   <i class="bi bi-chevron-up" aria-hidden="true"></i>
                 </button>
               </div>
-              <div class="beftn-card-body" id="incBulkBody">
+              <div class="beftn-card-body is-collapsed" id="incBulkBody">
                 <div class="beftn-card-body-inner">
                   <div class="beftn-field beftn-field--full">
                     <label class="beftn-label-block" for="failedreleaseincBulkPin">PIN / Reference</label>
@@ -542,34 +525,15 @@
             </section>
 
             <section class="beftn-module-card">
-              <div class="beftn-action-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincMarking">Marking Transaction</label>
-                  <select id="failedreleaseincMarking" class="beftn-select">
-                    <option value="">— Select marking —</option>
-                    <option>Mark for Release</option>
-                    <option>Hold</option>
-                  </select>
-                </div>
-
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="failedreleaseincRemarks">Remarks</label>
-                  <input type="text" id="failedreleaseincRemarks" class="beftn-input" placeholder="Enter remarks">
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--between">
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
               <div class="beftn-module-card-head">
                 <div>
                   <h2 class="beftn-module-card-title">Results — Incentive</h2>
                   <p class="beftn-module-card-sub">Failed Release output for incentive transactions</p>
                 </div>
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+                <div class="beftn-module-card-tools">
+                  <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+                  <button type="button" class="beftn-btn beftn-btn-accent" data-ask-remarks><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
+                </div>
               </div>
               <div class="beftn-table-wrap">
                 <table class="beftn-table">
@@ -607,6 +571,7 @@
     <script src="assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/toast.js"></script>
     <script src="assets/js/action-modal.js"></script>
     <script src="assets/js/beftn-page.js"></script>
   </body>

@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MTB A/C Transfer Failed Release - RMS</title>
+    <title>Pending for Funds - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
     <link rel="stylesheet" href="assets/css/beftn.css" />
-        <link rel="stylesheet" href="assets/css/toast.css" />
+    <link rel="stylesheet" href="assets/css/reports.css" />
+    <link rel="stylesheet" href="assets/css/toast.css" />
     <link rel="stylesheet" href="assets/css/action-modal.css" />
   </head>
-  <body class="dashboard-page" data-page="mtb-transfer-failed-release">
+  <body class="dashboard-page" data-page="reports-pending-for-funds">
     <!-- Main Dashboard Layout -->
     <div class="dashboard-wrapper">
       <!-- Left Sidebar -->
@@ -82,12 +83,12 @@
           </div>
 
           <!-- MTB A/C Transfer -->
-          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-mtb-transfer-sub" aria-expanded="true">
+          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-mtb-transfer-sub">
             <i class="bi bi-wallet2 nav-item-icon" aria-hidden="true"></i>
             <span>MTB A/C Transfer</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle MTB A/C Transfer sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav subnav-open" id="nav-mtb-transfer-sub">
+          <div class="sidebar-subnav" id="nav-mtb-transfer-sub">
             <a href="mtb-transfer-processing-queue.html" class="subnav-item">Processing Queue</a>
             <a href="mtb-transfer-failed-release.html" class="subnav-item">Failed Release</a>
             <a href="mtb-transfer-callback-retry.html" class="subnav-item">Callback Retry</a>
@@ -152,19 +153,19 @@
           </div>
 
           <!-- Reports & MIS -->
-          <a href="#" class="nav-item nav-has-children" data-subnav-id="nav-reports-mis-sub">
+          <a href="#" class="nav-item nav-has-children active nav-open" data-subnav-id="nav-reports-mis-sub" aria-expanded="true">
             <i class="bi bi-bar-chart nav-item-icon" aria-hidden="true"></i>
             <span>Reports &amp; MIS</span>
             <button class="nav-expand-btn" type="button" aria-label="Toggle Reports and MIS sub menu"><i class="bi bi-chevron-right"></i></button>
           </a>
-          <div class="sidebar-subnav" id="nav-reports-mis-sub">
+          <div class="sidebar-subnav subnav-open" id="nav-reports-mis-sub">
             <a href="reports-balance.html" class="subnav-item">Exchange House Balance</a>
             <a href="reports-principle.html" class="subnav-item">Principle Report</a>
             <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
             <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
             <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>
             <a href="reports-pending-transactions.html" class="subnav-item">Pending Transactions</a>
-            <a href="reports-pending-for-funds.html" class="subnav-item">Pending for Funds</a>
+            <a href="reports-pending-for-funds.html" class="subnav-item active">Pending for Funds</a>
           </div>
 
           <!-- Log & API Monitoring -->
@@ -358,13 +359,10 @@
           </div>
         </header>
 
-        
-        <div class="beftn-module-page">
+        <div class="beftn-module-page rpt-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">MTB A/C Transfer <i class="bi bi-chevron-right" aria-hidden="true"></i> Failed Release</p>
-              <h1 class="beftn-module-title">MTB A/C Transfer — Failed Release</h1>
-              <p class="beftn-module-desc">Review and release failed MTB A/C Transfer transactions for principle and incentive remittance.</p>
+              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Pending for Funds</p>
             </div>
           </header>
 
@@ -376,70 +374,28 @@
             </nav>
           </div>
 
-          
           <div class="beftn-type-panel" data-beftn-panel="principle">
             <section class="beftn-module-card">
-              <div class="beftn-filter-grid">
+              <div class="beftn-filter-grid beftn-filter-grid--two">
                 <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleasepriFromDate">From Date</label>
-                  <input type="date" id="mtbtransferfailedreleasepriFromDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleasepriToDate">To Date</label>
-                  <input type="date" id="mtbtransferfailedreleasepriToDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleasepriType">Principal Status</label>
-                  <select id="mtbtransferfailedreleasepriType" class="beftn-select">
+                  <label class="beftn-label-block" for="pffPriParty">Party</label>
+                  <select id="pffPriParty" class="beftn-select">
                     <option value="">— Select —</option>
-                    <option>All Types</option><option>Standard</option><option>Express</option>
+                    <option value="Moneygram">Moneygram</option>
+                    <option value="Remitly">Remitly</option>
+                  </select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="pffPriMode">Mode</label>
+                  <select id="pffPriMode" class="beftn-select">
+                    <option value="">— Select —</option>
+                    <option value="Eft">Eft</option>
+                    <option value="Account Credit">Account Credit</option>
                   </select>
                 </div>
               </div>
               <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-field beftn-field--full">
-                <label class="beftn-label-block" for="mtbtransferfailedreleasepriBulkPin">PIN / Reference</label>
-                <textarea id="mtbtransferfailedreleasepriBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-action-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleasepriPaymentStatus">Payment Status</label>
-                  <select id="mtbtransferfailedreleasepriPaymentStatus" class="beftn-select">
-                    <option selected>Failed Release</option>
-                    <option>Pending</option>
-                    <option>Released</option>
-                    <option>Failed</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleasepriMarking">Marking Transaction</label>
-                  <select id="mtbtransferfailedreleasepriMarking" class="beftn-select">
-                    <option value="">— Select marking —</option>
-                    <option>Mark for Release</option>
-                    <option>Hold</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleasepriRemarks">Remarks</label>
-                  <input type="text" id="mtbtransferfailedreleasepriRemarks" class="beftn-input" placeholder="Enter remarks">
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--between">
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
+                <button type="button" class="beftn-btn beftn-btn-primary pff-search-btn" data-panel="principle" data-no-confirm><i class="bi bi-search" aria-hidden="true"></i> Search</button>
               </div>
             </section>
 
@@ -447,101 +403,55 @@
               <div class="beftn-module-card-head">
                 <div>
                   <h2 class="beftn-module-card-title">Results — Principle</h2>
-                  <p class="beftn-module-card-sub">Failed Release output for principle transactions</p>
+                  <p class="beftn-module-card-sub pff-results-sub">Pending for Funds output for principle transactions</p>
                 </div>
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+                <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Export</button>
               </div>
               <div class="beftn-table-wrap">
-                <table class="beftn-table">
+                <table class="beftn-table pff-results-table">
                   <thead>
                     <tr>
-                      <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                      <th>Exchange House</th>
+                      <th>Party</th>
+                      <th>Mode</th>
                       <th>PIN No</th>
                       <th>Sender Name</th>
-                      <th>Sender Address</th>
-                      <th>Sender Country</th>
                       <th>Beneficiary Name</th>
                       <th>Beneficiary Account</th>
-                      <th>Principal Amount</th>
-                      <th>Source of Fund</th>
-                      <th>Purpose of Fund</th>
+                      <th>Amount</th>
                       <th>Transaction Date</th>
-                      <th>Payment Status</th>
-                      <th>Sender Nationality</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td colspan="14"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No principle records found. Run a search to view results.</div></td></tr>
+                    <tr><td colspan="9"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No principle records found. Run a search to view results.</div></td></tr>
                   </tbody>
                 </table>
               </div>
             </section>
           </div>
-          
+
           <div class="beftn-type-panel" data-beftn-panel="incentive" hidden>
             <section class="beftn-module-card">
-              <div class="beftn-filter-grid">
+              <div class="beftn-filter-grid beftn-filter-grid--two">
                 <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleaseincFromDate">From Date</label>
-                  <input type="date" id="mtbtransferfailedreleaseincFromDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleaseincToDate">To Date</label>
-                  <input type="date" id="mtbtransferfailedreleaseincToDate" class="beftn-input">
-                </div>
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleaseincType">Incentive Status</label>
-                  <select id="mtbtransferfailedreleaseincType" class="beftn-select">
+                  <label class="beftn-label-block" for="pffIncParty">Party</label>
+                  <select id="pffIncParty" class="beftn-select">
                     <option value="">— Select —</option>
-                    <option>All Types</option><option>Regular Incentive</option><option>Special Incentive</option>
+                    <option value="Moneygram">Moneygram</option>
+                    <option value="Remitly">Remitly</option>
+                  </select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="pffIncMode">Mode</label>
+                  <select id="pffIncMode" class="beftn-select">
+                    <option value="">— Select —</option>
+                    <option value="Eft">Eft</option>
+                    <option value="Account Credit">Account Credit</option>
                   </select>
                 </div>
               </div>
               <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-field beftn-field--full">
-                <label class="beftn-label-block" for="mtbtransferfailedreleaseincBulkPin">PIN / Reference</label>
-                <textarea id="mtbtransferfailedreleaseincBulkPin" class="beftn-textarea" placeholder="Enter one or more PIN / reference numbers (one per line)"></textarea>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--center">
-                <button type="button" class="beftn-btn beftn-btn-primary"><i class="bi bi-search" aria-hidden="true"></i> Search Bulk</button>
-              </div>
-            </section>
-
-            <section class="beftn-module-card">
-              <div class="beftn-action-grid">
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleaseincPaymentStatus">Payment Status</label>
-                  <select id="mtbtransferfailedreleaseincPaymentStatus" class="beftn-select">
-                    <option selected>Failed Release</option>
-                    <option>Pending</option>
-                    <option>Released</option>
-                    <option>Failed</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleaseincMarking">Marking Transaction</label>
-                  <select id="mtbtransferfailedreleaseincMarking" class="beftn-select">
-                    <option value="">— Select marking —</option>
-                    <option>Mark for Release</option>
-                    <option>Hold</option>
-                  </select>
-                </div>
-                
-                <div class="beftn-field">
-                  <label class="beftn-label-block" for="mtbtransferfailedreleaseincRemarks">Remarks</label>
-                  <input type="text" id="mtbtransferfailedreleaseincRemarks" class="beftn-input" placeholder="Enter remarks">
-                </div>
-              </div>
-              <div class="beftn-module-actions beftn-module-actions--between">
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-                <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Release</button>
+                <button type="button" class="beftn-btn beftn-btn-primary pff-search-btn" data-panel="incentive" data-no-confirm><i class="bi bi-search" aria-hidden="true"></i> Search</button>
               </div>
             </section>
 
@@ -549,32 +459,27 @@
               <div class="beftn-module-card-head">
                 <div>
                   <h2 class="beftn-module-card-title">Results — Incentive</h2>
-                  <p class="beftn-module-card-sub">Failed Release output for incentive transactions</p>
+                  <p class="beftn-module-card-sub pff-results-sub">Pending for Funds output for incentive transactions</p>
                 </div>
-                <button type="button" class="beftn-btn beftn-btn-outline"><i class="bi bi-download" aria-hidden="true"></i> Export</button>
+                <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Export</button>
               </div>
               <div class="beftn-table-wrap">
-                <table class="beftn-table">
+                <table class="beftn-table pff-results-table">
                   <thead>
                     <tr>
-                      <th class="beftn-check-col"><input type="checkbox" aria-label="Select all"></th>
-                      <th>Exchange House</th>
+                      <th>Party</th>
+                      <th>Mode</th>
                       <th>PIN No</th>
                       <th>Sender Name</th>
-                      <th>Sender Address</th>
-                      <th>Sender Country</th>
                       <th>Beneficiary Name</th>
                       <th>Beneficiary Account</th>
-                      <th>Incentive Amount</th>
-                      <th>Source of Fund</th>
-                      <th>Purpose of Fund</th>
+                      <th>Amount</th>
                       <th>Transaction Date</th>
-                      <th>Payment Status</th>
-                      <th>Sender Nationality</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td colspan="14"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No incentive records found. Run a search to view results.</div></td></tr>
+                    <tr><td colspan="9"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No incentive records found. Run a search to view results.</div></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -592,5 +497,6 @@
     <script src="assets/js/toast.js"></script>
     <script src="assets/js/action-modal.js"></script>
     <script src="assets/js/beftn-page.js"></script>
+    <script src="assets/js/pending-for-funds.js"></script>
   </body>
 </html>

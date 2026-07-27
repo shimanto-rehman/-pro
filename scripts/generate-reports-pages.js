@@ -9,6 +9,8 @@ const reportLinks = [
   { href: 'reports-incentive.html', text: 'Incentive Report', slug: 'incentive' },
   { href: 'reports-merge-statement.html', text: 'Merge Statement', slug: 'merge-statement' },
   { href: 'reports-remittance-certificate.html', text: 'Remittance Certificate', slug: 'remittance-certificate' },
+  { href: 'reports-pending-transactions.html', text: 'Pending Transactions', slug: 'pending-transactions' },
+  { href: 'reports-pending-for-funds.html', text: 'Pending for Funds', slug: 'pending-for-funds' },
 ];
 
 const selectAll = '<option value="">— Select ALL —</option>';
