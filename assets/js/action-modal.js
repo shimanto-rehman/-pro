@@ -111,6 +111,9 @@
     if (!isInActionScope(btn)) {
       return false;
     }
+    if (btn.closest('.beftn-searchable')) {
+      return false;
+    }
     if (
       btn.classList.contains('nav-expand-btn') ||
       btn.classList.contains('sidebar-expand-toggle') ||

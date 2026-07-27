@@ -30,6 +30,44 @@
   }
 })();
 
+/* ---- Report panel clear ---- */
+(function () {
+  function resetSearchableField(select) {
+    if (!select) return;
+    select.value = '';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+
+    var wrapper = select.closest('.beftn-searchable');
+    if (!wrapper) return;
+
+    wrapper.querySelectorAll('.beftn-searchable-option').forEach(function (optionBtn) {
+      var selected = optionBtn.dataset.value === '';
+      optionBtn.classList.toggle('is-selected', selected);
+    });
+
+    var triggerText = wrapper.querySelector('.beftn-searchable-trigger-text');
+    if (triggerText) {
+      var placeholder = select.options[0] ? select.options[0].textContent : '— Select —';
+      triggerText.textContent = placeholder;
+      triggerText.classList.add('is-placeholder');
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    var clearBtn = event.target.closest('[data-rpt-clear]');
+    if (!clearBtn) return;
+
+    var panel = clearBtn.closest('.beftn-type-panel') || document;
+    panel.querySelectorAll('input').forEach(function (field) {
+      if (field.type !== 'button' && field.type !== 'submit' && field.type !== 'hidden') {
+        field.value = '';
+      }
+    });
+
+    panel.querySelectorAll('select').forEach(resetSearchableField);
+  });
+})();
+
 /* ---- Card expand / minimize toggle ---- */
 (function () {
   document.addEventListener('click', function (e) {

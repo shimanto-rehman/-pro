@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Principle Report - RMS</title>
+    <title>Principle &amp; Incentive Report - RMS</title>
     <link rel="icon" type="image/x-icon" href="assets/images/remitance.png">
     <link rel="stylesheet" href="assets/bootstrap-5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
@@ -163,8 +163,7 @@
           </a>
           <div class="sidebar-subnav subnav-open" id="nav-reports-mis-sub">
             <a href="reports-balance.html" class="subnav-item">Exchange House Balance</a>
-            <a href="reports-principle.html" class="subnav-item">Principle Report</a>
-            <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
+            <a href="reports-principle.html" class="subnav-item active">Principle & Incentive Report</a>
             <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
             <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>
             <a href="reports-pending-transactions.html" class="subnav-item">Pending Transactions</a>
@@ -365,72 +364,91 @@
         <div class="beftn-module-page rpt-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Principle Report</p>
-              <h1 class="beftn-module-title">Principle Report</h1>
-              <p class="beftn-module-desc">Search and download principle remittance transaction reports.</p>
+              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Principle &amp; Incentive Report</p>
             </div>
           </header>
 
-          <section class="beftn-module-card">
-            <div class="rpt-filter-grid">
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriFrom">From Date</label>
-                <input type="date" id="rptPriFrom" class="beftn-input">
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriTo">To Date</label>
-                <input type="date" id="rptPriTo" class="beftn-input">
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriTxnType">Transaction Type</label>
-                <select id="rptPriTxnType" class="beftn-select"><option value="">— Select ALL —</option><option>Principle</option><option>Incentive</option></select>
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriExHouse">EX House</label>
-                <select id="rptPriExHouse" class="beftn-select"><option value="">— Select Ex_House —</option><option>Western Union</option><option>MoneyGram</option><option>Ria Money Transfer</option></select>
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriPayStatus">Payment Status</label>
-                <select id="rptPriPayStatus" class="beftn-select"><option value="">— Select ALL —</option><option>Released</option><option>Pending</option><option>Failed</option></select>
-              </div>
-            </div>
-            <div class="beftn-module-actions beftn-module-actions--center">
-              <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-x-circle" aria-hidden="true"></i> Clear</button>
-            </div>
-          </section>
+          <div class="beftn-type-nav-wrap">
+            <p class="beftn-type-nav-label">Select transaction type</p>
+            <nav class="beftn-type-nav" aria-label="Transaction type">
+              <button type="button" class="beftn-type-nav-btn is-active" data-beftn-type="principle" aria-selected="true">Principle</button>
+              <button type="button" class="beftn-type-nav-btn" data-beftn-type="incentive" aria-selected="false">Incentive</button>
+            </nav>
+          </div>
 
-          <section class="beftn-module-card">
-            <div class="beftn-module-card-head">
-              <div>
-                <h2 class="beftn-module-card-title">Report results</h2>
-                <p class="beftn-module-card-sub">Principle transaction report output</p>
+          <div class="beftn-type-panel" data-beftn-panel="principle">
+            <section class="beftn-module-card">
+              <div class="beftn-filter-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptPriFrom">From Date</label>
+                  <input type="date" id="rptPriFrom" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptPriTo">To Date</label>
+                  <input type="date" id="rptPriTo" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptPriExHouse">EX House</label>
+                  <select id="rptPriExHouse" class="beftn-select">
+                    <option value="">— Select Ex House —</option>
+                    <option>Western Union</option>
+                    <option>MoneyGram</option>
+                    <option>Ria Money Transfer</option>
+                  </select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptPriPayStatus">Payment Status</label>
+                  <select id="rptPriPayStatus" class="beftn-select">
+                    <option value="">— Select ALL —</option>
+                    <option>Released</option>
+                    <option>Pending</option>
+                    <option>Failed</option>
+                  </select>
+                </div>
               </div>
-              <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-            </div>
-            <div class="beftn-table-wrap">
-              <table class="beftn-table">
-                <thead>
-                  <tr>
-                    <th>Party ID</th>
-                    <th>EX House Name</th>
-                    <th>Reference Number</th>
-                    <th>Tran Type</th>
-                    <th>Create Time</th>
-                    <th>Response Time</th>
-                    <th>Journal Num</th>
-                    <th>CBS Resp Msg</th>
-                    <th>Sender Full Name</th>
-                    <th>Sender Address</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Account</th>
-                    <th>Beneficiary Bank</th>
-                  </tr>
-                </thead>
-                <tbody><tr><td colspan="13"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>No records found. Run a search to view the principle report.</div></td></tr></tbody>
-              </table>
-            </div>
-          </section>
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+                <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm data-rpt-clear><i class="bi bi-x-circle" aria-hidden="true"></i> Clear</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="beftn-type-panel" data-beftn-panel="incentive" hidden>
+            <section class="beftn-module-card">
+              <div class="beftn-filter-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptIncFrom">From Date</label>
+                  <input type="date" id="rptIncFrom" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptIncTo">To Date</label>
+                  <input type="date" id="rptIncTo" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptIncExHouse">EX House</label>
+                  <select id="rptIncExHouse" class="beftn-select">
+                    <option value="">— Select Ex House —</option>
+                    <option>Western Union</option>
+                    <option>MoneyGram</option>
+                    <option>Ria Money Transfer</option>
+                  </select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rptIncPayStatus">Payment Status</label>
+                  <select id="rptIncPayStatus" class="beftn-select">
+                    <option value="">— Select ALL —</option>
+                    <option>Released</option>
+                    <option>Pending</option>
+                    <option>Failed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+                <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm data-rpt-clear><i class="bi bi-x-circle" aria-hidden="true"></i> Clear</button>
+              </div>
+            </section>
+          </div>
         </div>
 
       </main>
@@ -442,5 +460,6 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/toast.js"></script>
     <script src="assets/js/action-modal.js"></script>
+    <script src="assets/js/beftn-page.js"></script>
   </body>
 </html>

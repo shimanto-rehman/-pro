@@ -65,8 +65,7 @@ const subnavUpdates = [
     id: 'nav-reports-mis-sub',
     inner: `
             <a href="reports-balance.html" class="subnav-item">Exchange House Balance</a>
-            <a href="reports-principle.html" class="subnav-item">Principle Report</a>
-            <a href="reports-incentive.html" class="subnav-item">Incentive Report</a>
+            <a href="reports-principle.html" class="subnav-item">Principle & Incentive Report</a>
             <a href="reports-merge-statement.html" class="subnav-item">Merge Statement</a>
             <a href="reports-remittance-certificate.html" class="subnav-item">Remittance Certificate</a>
             <a href="reports-pending-transactions.html" class="subnav-item">Pending Transactions</a>

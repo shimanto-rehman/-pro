@@ -5,8 +5,7 @@ const root = path.join(__dirname, '..');
 
 const reportLinks = [
   { href: 'reports-balance.html', text: 'Exchange House Balance', slug: 'balance' },
-  { href: 'reports-principle.html', text: 'Principle Report', slug: 'principle' },
-  { href: 'reports-incentive.html', text: 'Incentive Report', slug: 'incentive' },
+  { href: 'reports-principle.html', text: 'Principle & Incentive Report', slug: 'principle' },
   { href: 'reports-merge-statement.html', text: 'Merge Statement', slug: 'merge-statement' },
   { href: 'reports-remittance-certificate.html', text: 'Remittance Certificate', slug: 'remittance-certificate' },
   { href: 'reports-pending-transactions.html', text: 'Pending Transactions', slug: 'pending-transactions' },
@@ -15,7 +14,7 @@ const reportLinks = [
 
 const selectAll = '<option value="">— Select ALL —</option>';
 const selectExHouse =
-  '<option value="">— Select Ex_House —</option><option>Western Union</option><option>MoneyGram</option><option>Ria Money Transfer</option>';
+  '<option value="">— Select Ex House —</option><option>Western Union</option><option>MoneyGram</option><option>Ria Money Transfer</option>';
 
 function renderReportsNav(activeSlug) {
   const linksHtml = reportLinks
@@ -55,149 +54,59 @@ function tableEmpty(colspan, msg) {
   return `<tr><td colspan="${colspan}"><div class="beftn-empty"><i class="bi bi-inbox" aria-hidden="true"></i>${msg}</div></td></tr>`;
 }
 
-function buildPrincipleReport() {
+function buildPrincipleIncentiveFilters(prefix) {
+  const payStatus = `${selectAll}<option>Released</option><option>Pending</option><option>Failed</option>`;
   return `
-        <div class="beftn-module-page rpt-page">
-          <header class="beftn-module-hero">
-            <div>
-              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Principle Report</p>
-              <h1 class="beftn-module-title">Principle Report</h1>
-              <p class="beftn-module-desc">Search and download principle remittance transaction reports.</p>
-            </div>
-          </header>
-
-          <section class="beftn-module-card">
-            <div class="rpt-filter-grid">
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriFrom">From Date</label>
-                <input type="date" id="rptPriFrom" class="beftn-input">
+            <section class="beftn-module-card">
+              <div class="beftn-filter-grid">
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rpt${prefix}From">From Date</label>
+                  <input type="date" id="rpt${prefix}From" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rpt${prefix}To">To Date</label>
+                  <input type="date" id="rpt${prefix}To" class="beftn-input">
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rpt${prefix}ExHouse">EX House</label>
+                  <select id="rpt${prefix}ExHouse" class="beftn-select">${selectExHouse}</select>
+                </div>
+                <div class="beftn-field">
+                  <label class="beftn-label-block" for="rpt${prefix}PayStatus">Payment Status</label>
+                  <select id="rpt${prefix}PayStatus" class="beftn-select">${payStatus}</select>
+                </div>
               </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriTo">To Date</label>
-                <input type="date" id="rptPriTo" class="beftn-input">
+              <div class="beftn-module-actions beftn-module-actions--center">
+                <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Download</button>
+                <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm data-rpt-clear><i class="bi bi-x-circle" aria-hidden="true"></i> Clear</button>
               </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriTxnType">Transaction Type</label>
-                <select id="rptPriTxnType" class="beftn-select">${selectAll}<option>Principle</option><option>Incentive</option></select>
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriExHouse">EX House</label>
-                <select id="rptPriExHouse" class="beftn-select">${selectExHouse}</select>
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptPriPayStatus">Payment Status</label>
-                <select id="rptPriPayStatus" class="beftn-select">${selectAll}<option>Released</option><option>Pending</option><option>Failed</option></select>
-              </div>
-            </div>
-            <div class="beftn-module-actions beftn-module-actions--center">
-              <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-x-circle" aria-hidden="true"></i> Clear</button>
-            </div>
-          </section>
-
-          <section class="beftn-module-card">
-            <div class="beftn-module-card-head">
-              <div>
-                <h2 class="beftn-module-card-title">Report results</h2>
-                <p class="beftn-module-card-sub">Principle transaction report output</p>
-              </div>
-              <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Download</button>
-            </div>
-            <div class="beftn-table-wrap">
-              <table class="beftn-table">
-                <thead>
-                  <tr>
-                    <th>Party ID</th>
-                    <th>EX House Name</th>
-                    <th>Reference Number</th>
-                    <th>Tran Type</th>
-                    <th>Create Time</th>
-                    <th>Response Time</th>
-                    <th>Journal Num</th>
-                    <th>CBS Resp Msg</th>
-                    <th>Sender Full Name</th>
-                    <th>Sender Address</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Account</th>
-                    <th>Beneficiary Bank</th>
-                  </tr>
-                </thead>
-                <tbody>${tableEmpty(13, 'No records found. Run a search to view the principle report.')}</tbody>
-              </table>
-            </div>
-          </section>
-        </div>`;
+            </section>`;
 }
 
-function buildIncentiveReport() {
+function buildPrincipleIncentiveReport() {
   return `
         <div class="beftn-module-page rpt-page">
           <header class="beftn-module-hero">
             <div>
-              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Incentive Report</p>
-              <h1 class="beftn-module-title">Incentive Report</h1>
-              <p class="beftn-module-desc">Search and process incentive remittance transaction reports.</p>
+              <p class="beftn-module-breadcrumb">Reports &amp; MIS <i class="bi bi-chevron-right" aria-hidden="true"></i> Principle &amp; Incentive Report</p>
             </div>
           </header>
 
-          <section class="beftn-module-card">
-            <div class="rpt-filter-grid">
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptIncFrom">From Date</label>
-                <input type="date" id="rptIncFrom" class="beftn-input">
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptIncTo">To Date</label>
-                <input type="date" id="rptIncTo" class="beftn-input">
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptIncTxnType">Transaction Type</label>
-                <select id="rptIncTxnType" class="beftn-select">${selectAll}<option>Incentive</option></select>
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptIncExHouse">EX House</label>
-                <select id="rptIncExHouse" class="beftn-select">${selectExHouse}</select>
-              </div>
-              <div class="rpt-inline-field">
-                <label class="beftn-label-block" for="rptIncPayStatus">Payment Status</label>
-                <select id="rptIncPayStatus" class="beftn-select">${selectAll}</select>
-              </div>
-            </div>
-            <div class="beftn-module-actions beftn-module-actions--center">
-              <button type="button" class="beftn-btn beftn-btn-primary" data-no-confirm><i class="bi bi-search" aria-hidden="true"></i> Search</button>
-              <button type="button" class="beftn-btn beftn-btn-accent"><i class="bi bi-play-circle" aria-hidden="true"></i> Process</button>
-            </div>
-          </section>
+          <div class="beftn-type-nav-wrap">
+            <p class="beftn-type-nav-label">Select transaction type</p>
+            <nav class="beftn-type-nav" aria-label="Transaction type">
+              <button type="button" class="beftn-type-nav-btn is-active" data-beftn-type="principle" aria-selected="true">Principle</button>
+              <button type="button" class="beftn-type-nav-btn" data-beftn-type="incentive" aria-selected="false">Incentive</button>
+            </nav>
+          </div>
 
-          <section class="beftn-module-card">
-            <div class="beftn-module-card-head">
-              <div>
-                <h2 class="beftn-module-card-title">Report results</h2>
-                <p class="beftn-module-card-sub">Incentive transaction report output</p>
-              </div>
-              <button type="button" class="beftn-btn beftn-btn-outline" data-no-confirm><i class="bi bi-download" aria-hidden="true"></i> Export</button>
-            </div>
-            <div class="beftn-table-wrap">
-              <table class="beftn-table">
-                <thead>
-                  <tr>
-                    <th>Entity ID</th>
-                    <th>BP Party ID</th>
-                    <th>Reference Number</th>
-                    <th>Sender Full Name</th>
-                    <th>Sender Country</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Account</th>
-                    <th>Beneficiary Bank</th>
-                    <th>Bank Branch</th>
-                    <th>Routing Number</th>
-                    <th>Sending Currency</th>
-                  </tr>
-                </thead>
-                <tbody>${tableEmpty(11, 'No records found. Run a search to view the incentive report.')}</tbody>
-              </table>
-            </div>
-          </section>
+          <div class="beftn-type-panel" data-beftn-panel="principle">
+${buildPrincipleIncentiveFilters('Pri')}
+          </div>
+
+          <div class="beftn-type-panel" data-beftn-panel="incentive" hidden>
+${buildPrincipleIncentiveFilters('Inc')}
+          </div>
         </div>`;
 }
 
@@ -476,15 +385,8 @@ const pages = [
     slug: 'principle',
     file: 'reports-principle.html',
     dataPage: 'reports-principle',
-    title: 'Principle Report - RMS',
-    content: buildPrincipleReport,
-  },
-  {
-    slug: 'incentive',
-    file: 'reports-incentive.html',
-    dataPage: 'reports-incentive',
-    title: 'Incentive Report - RMS',
-    content: buildIncentiveReport,
+    title: 'Principle & Incentive Report - RMS',
+    content: buildPrincipleIncentiveReport,
   },
   {
     slug: 'merge-statement',
@@ -544,6 +446,13 @@ for (const page of pages) {
     html = html.replace(
       /<script src="assets\/js\/main\.js"><\/script>/,
       '<script src="assets/js/main.js"></script>\n    <script src="assets/js/action-modal.js"></script>'
+    );
+  }
+
+  if (page.slug === 'principle' && !html.includes('beftn-page.js')) {
+    html = html.replace(
+      /<script src="assets\/js\/action-modal\.js"><\/script>/,
+      '<script src="assets/js/action-modal.js"></script>\n    <script src="assets/js/beftn-page.js"></script>'
     );
   }
 

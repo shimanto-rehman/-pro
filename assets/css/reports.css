@@ -18,7 +18,7 @@
   display: flex;
   align-items: stretch;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(61, 26, 100, 0.12);
 }
 
